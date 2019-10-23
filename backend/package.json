@@ -6,7 +6,22 @@
   "repository": "git@github.com:FelipeSchimidt/agape.git",
   "author": "Felipe Santos",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "eslint": "eslint --init"
+  },
   "dependencies": {
-    "express": "^4.17.1"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "sequelize": "^5.21.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.5.1",
+    "nodemon": "^1.19.4",
+    "pg": "^7.12.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize-cli": "^5.5.1"
   }
 }

@@ -1,0 +1,15 @@
+version: "3.5"
+
+services:
+  postgres:
+    image: postgres
+    ports:
+      - 5430:5432
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_user: root
+      POSTGRES_DB: data
+  adminer:
+    image: adminer
+    ports:
+      - 8081:8080
