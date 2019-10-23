@@ -1,0 +1,12 @@
+{
+  "name": "agape_backend",
+  "version": "1.0.0",
+  "description": "back para gestao escolar",
+  "main": "index.js",
+  "repository": "git@github.com:FelipeSchimidt/agape.git",
+  "author": "Felipe Santos",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
