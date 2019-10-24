@@ -5,7 +5,7 @@ class Aluno extends Model {
     super.init(
       {
         nome: DataTypes.STRING,
-        rg: DataTypes.INTEGER,
+        rg: DataTypes.STRING,
         cpf: DataTypes.STRING,
         nascimento: DataTypes.DATE
       },

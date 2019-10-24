@@ -2,34 +2,34 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("alunos", {
+    return queryInterface.createTable("parentes", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
       },
-      nome: {
+      mae: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      rg: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-      cpf: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-      nascimento: {
-        type: Sequelize.DATEONLY,
+      cpfMae: {
+        type: Sequelize.BIGINT(11),
         allowNull: false
       },
-      created_at: {
+      pai: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      cpfPai: {
+        type: Sequelize.BIGINT(11),
+        allowNull: true
+      },
+      createdAt: {
         type: Sequelize.DATE,
         allowNull: false
       },
-      updated_at: {
+      updatedAt: {
         type: Sequelize.DATE,
         allowNull: false
       }
@@ -37,6 +37,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("alunos");
+    return queryInterface.dropTable("parentes");
   }
 };
