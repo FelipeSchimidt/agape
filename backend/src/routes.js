@@ -1,6 +1,9 @@
-const route = require("express").Router();
-const AlunoController = require("./controllers/AlunoController");
+const route = require('express').Router();
+const AlunoController = require('./controllers/AlunoController');
 
-route.get("/", AlunoController.store);
+route.get('/aluno', AlunoController.index);
+route.get('/aluno/:id', AlunoController.show);
+route.post('/aluno', AlunoController.store);
+route.put('/aluno/:id', AlunoController.update);
 
 module.exports = route;
