@@ -1,21 +1,21 @@
-'use strict';
+"use strict";
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: (queryInterface /* Sequelize */) => {
     return queryInterface.bulkInsert(
-      'Parentes',
+      "Parentes",
       [
-        /* {
-          mae: 'Maria Clara',
+        {
+          mae: "Maria Clara",
           cpfMae: 85999634566,
-          pai: 'João Silva',
+          pai: "João Silva",
           createdAt: new Date(),
           updatedAt: new Date()
-        }, */
+        },
         {
-          mae: 'Valquiria Aparecida Vieira dos Santos',
+          mae: "Valquiria Aparecida Vieira dos Santos",
           cpfMae: 90279638865,
-          pai: 'Alfredo dos Santos',
+          pai: "Alfredo dos Santos",
           cpfPai: 65188866453,
           createdAt: new Date(),
           updatedAt: new Date()
@@ -25,7 +25,7 @@ module.exports = {
     );
   },
 
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Parentes', null, {});
+  down: (queryInterface /* Sequelize */) => {
+    return queryInterface.bulkDelete("Parentes", null, {});
   }
 };
