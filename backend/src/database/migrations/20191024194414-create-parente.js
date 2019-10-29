@@ -1,29 +1,35 @@
-"use strict";
+'use strict';
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("parentes", {
+    return queryInterface.createTable('familiar', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
       },
-      mae: {
+      nome: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      cpfMae: {
-        type: Sequelize.BIGINT(11),
+      cpf: {
+        type: Sequelize.BIGINT,
+        allowNull: true
+      },
+      rg: {
+        type: Sequelize.BIGINT,
+        allowNull: true
+      },
+      nascimento: {
+        type: Sequelize.DATEONLY,
         allowNull: false
       },
-      pai: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-      cpfPai: {
-        type: Sequelize.BIGINT(11),
-        allowNull: true
+      tipo: {
+        type: Sequelize.ENUM({
+          values: ['mãe', 'pai', 'avos', 'tios', 'primos']
+        }),
+        allowNull: false
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -36,7 +42,7 @@ module.exports = {
     });
   },
 
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("parentes");
+  down: (queryInterface /* Sequelize */) => {
+    return queryInterface.dropTable('familiar');
   }
 };

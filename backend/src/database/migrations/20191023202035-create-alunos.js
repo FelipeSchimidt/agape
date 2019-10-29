@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("alunos", {
+    return queryInterface.createTable('alunos', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -14,29 +14,37 @@ module.exports = {
         allowNull: false
       },
       rg: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: true
       },
       cpf: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
+        allowNull: true
+      },
+      certidao_nascimento: {
+        type: Sequelize.INTEGER,
         allowNull: true
       },
       nascimento: {
         type: Sequelize.DATEONLY,
         allowNull: false
       },
-      created_at: {
+      observacao: {
+        type: Sequelize.TEXT,
+        allowNull: true
+      },
+      createdAt: {
         type: Sequelize.DATE,
         allowNull: false
       },
-      updated_at: {
+      updatedAt: {
         type: Sequelize.DATE,
         allowNull: false
       }
     });
   },
 
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("alunos");
+  down: (queryInterface /* Sequelize */) => {
+    return queryInterface.dropTable('alunos');
   }
 };
