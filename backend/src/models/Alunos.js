@@ -7,7 +7,9 @@ class Aluno extends Model {
         nome: DataTypes.STRING,
         rg: DataTypes.STRING,
         cpf: DataTypes.STRING,
-        nascimento: DataTypes.DATE
+        nascimento: DataTypes.DATE,
+        certidao_nascimento: DataTypes.INTEGER,
+        observacao: DataTypes.TEXT
       },
       {
         sequelize

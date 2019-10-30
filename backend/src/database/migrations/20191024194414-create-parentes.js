@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('familiar', {
+    return queryInterface.createTable("parentes", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -27,15 +27,15 @@ module.exports = {
       },
       tipo: {
         type: Sequelize.ENUM({
-          values: ['mãe', 'pai', 'avos', 'tios', 'primos']
+          values: ["pai", "mãe", "avos", "tios", "primos"]
         }),
         allowNull: false
       },
-      createdAt: {
+      created_at: {
         type: Sequelize.DATE,
         allowNull: false
       },
-      updatedAt: {
+      updated_at: {
         type: Sequelize.DATE,
         allowNull: false
       }
@@ -43,6 +43,6 @@ module.exports = {
   },
 
   down: (queryInterface /* Sequelize */) => {
-    return queryInterface.dropTable('familiar');
+    return queryInterface.dropTable("parentes");
   }
 };
