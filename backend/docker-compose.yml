@@ -9,7 +9,4 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_user: root
       POSTGRES_DB: data
-  adminer:
-    image: adminer
-    ports:
-      - 8081:8080
+ 

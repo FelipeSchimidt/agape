@@ -2,22 +2,28 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("telefones", {
+    return queryInterface.createTable("professores", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
       },
-      telefone: {
+      nome: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      cpf: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      tipo: {
-        type: Sequelize.ENUM({
-          values: ["celular", "residencial", "trabalho"]
-        }),
-        allowNull: false
+      endereco: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      telefone: {
+        type: Sequelize.INTEGER,
+        allowNull: true
       },
       created_at: {
         type: Sequelize.DATE,
@@ -31,6 +37,6 @@ module.exports = {
   },
 
   down: (queryInterface /* Sequelize */) => {
-    return queryInterface.dropTable("telefones");
+    return queryInterface.dropTable("professores");
   }
 };
