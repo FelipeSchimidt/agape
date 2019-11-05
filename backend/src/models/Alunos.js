@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require("sequelize");
+const { Model, DataTypes } = require('sequelize');
 
 class Aluno extends Model {
   static init(sequelize) {
@@ -9,12 +9,26 @@ class Aluno extends Model {
         cpf: DataTypes.STRING,
         nascimento: DataTypes.DATE,
         certidao_nascimento: DataTypes.INTEGER,
-        observacao: DataTypes.TEXT
+        observacao: DataTypes.TEXT,
+        parentes_cpf: DataTypes.BIGINT
       },
       {
         sequelize
       }
     );
+  }
+
+  static associate(models) {
+    this.belongsTo(models.Parentes, {
+      foreignKey: 'id',
+      as: 'alunos'
+    });
+
+    this.belongsToMany(models.Classes, {
+      foreignKey: 'classe_id',
+      through: 'classe-aluno',
+      as: 'classes'
+    });
   }
 }
 
