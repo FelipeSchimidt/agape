@@ -22,7 +22,11 @@ class Parente extends Model {
   }
 
   static associate(models) {
-    this.hasMany(models.Alunos, { foreignKey: 'parentes_cpf', as: 'alunos' });
+    this.belongsToMany(models.Aluno, {
+      foreignKey: 'alunos_id',
+      through: 'alunos-parentes',
+      as: 'alunos'
+    });
   }
 }
 

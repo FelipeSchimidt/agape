@@ -19,12 +19,13 @@ class Aluno extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Parentes, {
-      foreignKey: 'id',
-      as: 'alunos'
+    this.belongsToMany(models.Parente, {
+      foreignKey: 'parentes_id',
+      through: 'alunos-parentes',
+      as: 'parentes'
     });
 
-    this.belongsToMany(models.Classes, {
+    this.belongsToMany(models.Classe, {
       foreignKey: 'classe_id',
       through: 'classe-aluno',
       as: 'classes'
