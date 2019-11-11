@@ -14,13 +14,10 @@ Aluno.init(connection);
 Parente.init(connection);
 Professor.init(connection);
 Classe.init(connection);
-/* Telefone.init(connection);
-Endereco.init(connection); */
 
 Aluno.associate(connection.models);
 Parente.associate(connection.models);
 Classe.associate(connection.models);
 Professor.associate(connection.models);
-//Familiar.associations(Aluno);
 
 module.exports = connection;

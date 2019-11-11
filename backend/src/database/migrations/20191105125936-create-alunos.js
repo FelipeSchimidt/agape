@@ -13,16 +13,17 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      rg: {
-        type: Sequelize.INTEGER,
-        allowNull: true
-      },
       cpf: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
+        allowNull: true,
+        unique: true
+      },
+      rg: {
+        type: Sequelize.BIGINT,
         allowNull: true
       },
       certidao_nascimento: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
         allowNull: true
       },
       nascimento: {
@@ -32,13 +33,6 @@ module.exports = {
       observacao: {
         type: Sequelize.TEXT,
         allowNull: true
-      },
-      parentes_cpf: {
-        type: Sequelize.BIGINT,
-        allowNull: true,
-        references: { model: 'parentes', key: 'cpf' },
-        onUpdate: 'cascade',
-        onDelete: 'cascade'
       },
       created_at: {
         type: Sequelize.DATE,

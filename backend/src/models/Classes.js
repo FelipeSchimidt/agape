@@ -18,8 +18,8 @@ class Classe extends Model {
 
   static associate(models) {
     this.belongsToMany(models.Aluno, {
-      foreignKey: 'aluno_id',
-      through: 'classe-aluno',
+      foreignKey: 'classe_id',
+      through: 'classesAlunos',
       as: 'alunos'
     });
   }

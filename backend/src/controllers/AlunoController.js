@@ -1,5 +1,6 @@
 const Aluno = require('../models/Alunos');
 const Parente = require('../models/Parentes');
+const Classe = require('../models/Classes');
 
 module.exports = {
   async index(req, res) {
@@ -16,24 +17,27 @@ module.exports = {
   },
 
   async store(req, res) {
-    const { parentes_cpf } = req.params;
-    /* const {
-      nome,
-      rg,
-      cpf,
-      certidao_nascimento,
-      nascimento,
-      observacao,
-      parentes_cpf
-    } = req.body; */
+    const { parentes_cpf, classe_id } = req.params;
+    const { cpf } = req.body;
 
     const parente = await Parente.findOne({ parentes_cpf });
 
     if (!parente) {
       return res.status(404).json({ error: 'Familiar não encontrado' });
     }
-    //const parentes_cpf = parente_cpf;
-    const aluno = await Aluno.create(req.body);
+
+    const classe = await Classe.findByPk(classe_id);
+
+    if (!classe) {
+      return res.status(404).json({ error: 'Classe não cadastrada' });
+    }
+
+    const [aluno] = await Aluno.findOrCreate({
+      where: { cpf, ...req.body }
+    });
+
+    await parente.addAlunos(aluno);
+    await classe.addAlunos(aluno);
 
     return res.json(aluno);
   },
@@ -52,16 +56,21 @@ module.exports = {
   },
 
   async delete(req, res) {
-    const { id } = req.params;
+    const { parentes_cpf, aluno_id } = req.params;
 
-    const aluno = await Aluno.findByPk(id);
+    const parente = await Parente.findOne({ parentes_cpf });
+
+    if (!parente) {
+      return res.status(404).json({ error: 'Familiar não encontrado' });
+    }
+    const aluno = await Aluno.findByPk(aluno_id);
 
     if (!aluno) {
       return res.status(400).json({ error: 'Aluno não encontrado' });
     }
 
-    await aluno.destroy(aluno);
+    await parente.removeAluno(aluno);
 
-    return res.json({ msg: 'Aluno deletado' });
+    return res.json({ msg: 'Cadastro de aluno deletado' });
   }
 };

@@ -5,12 +5,11 @@ class Aluno extends Model {
     super.init(
       {
         nome: DataTypes.STRING,
-        rg: DataTypes.STRING,
-        cpf: DataTypes.STRING,
+        rg: DataTypes.BIGINT,
+        cpf: DataTypes.BIGINT,
         nascimento: DataTypes.DATE,
-        certidao_nascimento: DataTypes.INTEGER,
-        observacao: DataTypes.TEXT,
-        parentes_cpf: DataTypes.BIGINT
+        certidao_nascimento: DataTypes.BIGINT,
+        observacao: DataTypes.TEXT
       },
       {
         sequelize
@@ -19,16 +18,16 @@ class Aluno extends Model {
   }
 
   static associate(models) {
-    this.belongsToMany(models.Parente, {
-      foreignKey: 'parentes_id',
-      through: 'alunos-parentes',
-      as: 'parentes'
+    this.belongsToMany(models.Classe, {
+      foreignKey: 'aluno_id',
+      through: 'classesAlunos',
+      as: 'classes'
     });
 
-    this.belongsToMany(models.Classe, {
-      foreignKey: 'classe_id',
-      through: 'classe-aluno',
-      as: 'classes'
+    this.belongsToMany(models.Parente, {
+      foreignKey: 'alunos_id',
+      through: 'alunosParentes',
+      as: 'parentes'
     });
   }
 }
