@@ -11,4 +11,4 @@ server.use(require("../src/routes"));
 server.use(cors());
 server.use(morgan("dev"));
 
-server.listen(3000);
+server.listen(3333);

@@ -18,10 +18,9 @@ module.exports = {
 
   async store(req, res) {
     const { parentes_cpf, classe_id } = req.params;
-    const { cpf } = req.body;
 
-    const parente = await Parente.findOne({ parentes_cpf });
-
+    const parente = await Parente.findOne({ cpf: parentes_cpf });
+    console.log(parente);
     if (!parente) {
       return res.status(404).json({ error: 'Familiar não encontrado' });
     }
@@ -32,10 +31,13 @@ module.exports = {
       return res.status(404).json({ error: 'Classe não cadastrada' });
     }
 
-    const [aluno] = await Aluno.findOrCreate({
-      where: { cpf, ...req.body }
+    const [aluno, created] = await Aluno.findOrCreate({
+      where: { ...req.body }
     });
 
+    if (!created) {
+      return res.status(404).json({ error: 'Aluno não cadastrado' });
+    }
     await parente.addAlunos(aluno);
     await classe.addAlunos(aluno);
 

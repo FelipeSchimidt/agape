@@ -14,10 +14,10 @@ route.put('/parentes/:parentes_cpf/aluno/:id', AlunoController.update);
 route.delete('/parentes/:parentes_cpf/aluno/:aluno_id', AlunoController.delete);
 
 route.get('/parentes', ParenteController.index);
-route.get('/parentes/:cpf', ParenteController.show);
+route.get('/parentes/:parentes_cpf', ParenteController.show);
 route.post('/parentes', ParenteController.store);
-route.put('/parentes/:cpf', ParenteController.update);
-route.delete('/parentes/:cpf', ParenteController.delete);
+route.put('/parentes/:parentes_cpf', ParenteController.update);
+route.delete('/parentes/:parentes_cpf', ParenteController.delete);
 
 route.get('/classes', ClasseController.index);
 route.get('/classes/:classe_id', ClasseController.show);

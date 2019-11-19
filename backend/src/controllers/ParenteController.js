@@ -12,8 +12,8 @@ module.exports = {
   },
 
   async show(req, res) {
-    const { cpf } = req.params;
-    const parente = await Parente.findOne({ cpf });
+    const { parentes_cpf } = req.params;
+    const parente = await Parente.findOne({ parentes_cpf });
 
     if (!parente) {
       return res.status(404).json({ error: 'Parente não encontrado' });
@@ -29,9 +29,9 @@ module.exports = {
   },
 
   async update(req, res) {
-    const { cpf } = req.params;
+    const { parentes_cpf } = req.params;
 
-    const parente = await Parente.findOne({ cpf });
+    const parente = await Parente.findOne({ parentes_cpf });
 
     if (!parente) {
       return res.status(404).json({ error: 'Parente não encontrado' });
@@ -43,9 +43,9 @@ module.exports = {
   },
 
   async delete(req, res) {
-    const { cpf } = req.params;
+    const { parentes_cpf } = req.params;
 
-    const parente = await Parente.findOne({ cpf });
+    const parente = await Parente.findOne({ parentes_cpf });
 
     if (!parente) {
       return res.status(404).json({ error: 'Parente não encontrado' });
