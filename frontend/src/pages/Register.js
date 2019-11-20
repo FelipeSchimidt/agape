@@ -19,26 +19,32 @@ export default function Register() {
     <div>
       <h4>Lista de Alunos</h4>
       <br />
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Data Nascimento</th>
-            <th>CPF</th>
-            <th>Observações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {alunos.map(aluno => (
-            <tr key={aluno.id}>
-              <td>{aluno.nome}</td>
-              <td>{aluno.nascimento}</td>
-              <td>{aluno.cpf}</td>
-              <td>{aluno.observacao}</td>
+      {alunos.length > 0 ? (
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Data Nascimento</th>
+              <th>CPF</th>
+              <th>Observações</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {alunos.map(aluno => (
+              <tr key={aluno.id}>
+                <td>{aluno.nome}</td>
+                <td>{aluno.nascimento}</td>
+                <td>{aluno.cpf}</td>
+                <td>{aluno.observacao}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div className="empty">
+          <p>Registro de alunos vazio</p>
+        </div>
+      )}
     </div>
   );
 }
