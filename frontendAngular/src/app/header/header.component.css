@@ -1,0 +1,16 @@
+.App-header .title {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #721552;
+  background-color: #0a88;
+  margin-top: 10;
+  margin-bottom: 0;
+}
+
+.App-header .subtitle {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #721552;
+  background-color: #0a88;
+  margin: 0;
+}

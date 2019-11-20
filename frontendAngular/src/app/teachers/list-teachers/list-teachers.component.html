@@ -1,0 +1,19 @@
+<table>
+  <thead>
+    <tr>
+      <th>NOME</th>
+      <th>CPF</th>
+      <th>TELEFONE</th>
+      <th>ENDEREÇO</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let teacher of teachers">
+      <td>{{ teacher.nome }}</td>
+      <td>{{ teacher.cpf }}</td>
+      <td>{{ teacher.telefone }}</td>
+      <td>{{ teacher.endereco }}</td>
+    </tr>
+  </tbody>
+</table>

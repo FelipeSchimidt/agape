@@ -3,6 +3,8 @@ node_modules
 
 temp
 
+#frontendAngular
+
 /.pnp
 .pnp.js
 
