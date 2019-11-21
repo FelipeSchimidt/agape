@@ -4,20 +4,16 @@ import { CommonModule } from '@angular/common';
 import { ListTeachersComponent } from './list-teachers/list-teachers.component';
 import { TeachersComponent } from './teachers.component';
 import { ServicesModule } from '../services/services.module';
+import { CreateTeachersComponent } from './create-teachers/create-teachers.component';
 
 @NgModule({
   declarations: [
     ListTeachersComponent,
-    TeachersComponent
+    TeachersComponent,
+    CreateTeachersComponent
   ],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    TeachersComponent
-  ],
-  providers: [
-    ServicesModule
-  ]
+  imports: [CommonModule],
+  exports: [TeachersComponent],
+  providers: [ServicesModule]
 })
-export class TeachersModule { }
+export class TeachersModule {}

@@ -1,19 +1,54 @@
-<table>
-  <thead>
+<table class="table table-hover">
+  <thead class="thead-light">
     <tr>
-      <th>NOME</th>
-      <th>CPF</th>
-      <th>TELEFONE</th>
-      <th>ENDEREÇO</th>
-      <th></th>
+      <th scope="col">NOME</th>
+      <th scope="col">CPF</th>
+      <th scope="col">TELEFONE</th>
+      <th scope="col">ENDEREÇO</th>
+      <th scope="colspan">
+        <div>
+          <a routerLink="${app-create-teachers}">
+            <button
+              class="btn btn-success"
+              id="btn_adicionar"
+              (click)="openModal(template)"
+            >
+              Novo
+            </button>
+          </a>
+        </div>
+      </th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="">
     <tr *ngFor="let teacher of teachers">
       <td>{{ teacher.nome }}</td>
       <td>{{ teacher.cpf }}</td>
       <td>{{ teacher.telefone }}</td>
       <td>{{ teacher.endereco }}</td>
+      <td>
+        <div>
+          <button class="btn btn-primary" id="btn_alterar">Alterar</button>
+          <button class="btn btn-danger" id="btn_deletar">Deletar</button>
+        </div>
+      </td>
     </tr>
   </tbody>
 </table>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h3 class="modal-title">Cadastro</h3>
+    <button
+      type="button"
+      class="close"
+      aria-label="CLose"
+      (click)="modalRef.hide()"
+    >
+      &times;
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-create-teachers></app-create-teachers>
+  </div>
+</ng-template>
