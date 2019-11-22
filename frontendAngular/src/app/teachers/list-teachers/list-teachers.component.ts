@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { ServicesModule } from 'src/app/services/services.module';
 
 @Component({
   selector: 'app-list-teachers',
@@ -12,14 +13,14 @@ export class ListTeachersComponent implements OnInit {
 
   modalRef: BsModalRef;
 
-  constructor(private http: HttpClient, private modalService: BsModalService) {}
+  constructor(private http: ServicesModule, private modalService: BsModalService) {}
 
   ngOnInit() {
     this.getTeachers();
   }
 
   getTeachers() {
-    this.http.get('http://localhost:3333/professor').subscribe(
+    this.http.getAllTeachers().subscribe(
       response => {
         console.log(response);
         this.teachers = response;
