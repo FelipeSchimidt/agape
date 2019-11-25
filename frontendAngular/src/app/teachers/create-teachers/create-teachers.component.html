@@ -1,27 +1,104 @@
-<form action="">
+<form formGroup="teachersForm">
   <div class="container">
     <div class="form-row">
-      <div class="form-group col-md-12">
+      <div class="form-group col-md-8">
         <label for="nomeInput">Nome</label>
-        <input type="text" class="form-control" id="nomeInput" />
+        <input
+          type="text"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              teachersForm.get('nome').errors &&
+              teachersForm.get('nome').touched
+          }"
+          id="nomeInput"
+          formControlName="nome"
+        />
+        <div
+          *ngIf="
+            teachersForm.get('nome').hasError('required') &&
+            teachersForm.get('nome').hasError('touched')
+          "
+          class="invalid-feedback"
+        >
+          Nome é obrigatório
+        </div>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="telefoneInput">telefone</label>
+        <input
+          type="text"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              teachersForm.get('telefone').errors &&
+              teachersForm.get('telefone').touched
+          }"
+          id="telefoneInput"
+          formControlName="telefone"
+        />
+        <div class="invalid-feedback">
+          Telefone é obrigatório
+        </div>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="cpfInput">CPF</label>
-        <input type="text" class="form-control" id="cpfInput" />
+        <input
+          type="text"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              teachersForm.get('cpf').errors && teachersForm.get('cpf').touched
+          }"
+          id="cpfInput"
+          formControlName="cpf"
+        />
+        <div class="invalid-feedback">
+          CPF é obrigatório
+        </div>
       </div>
+
       <div class="form-group col-md-6">
         <label for="rgInput">RG</label>
-        <input type="text" class="form-control" id="rgInput" />
+        <input
+          type="text"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              teachersForm.get('rg').errors && teachersForm.get('rg').touched
+          }"
+          id="rgInput"
+          formControlName="rg"
+        />
+        <div class="invalid-feedback">
+          RG é obrigatório
+        </div>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-12">
         <label for="enderecoInput">Endereco</label>
-        <input type="text" class="form-control" id="enderecoInput" />
+        <input
+          type="text"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid':
+              teachersForm.get('endereco').errors &&
+              teachersForm.get('endereco').touched
+          }"
+          id="enderecoInput"
+          formControlName="endereco"
+        />
+        <div class="invalid-feedback">
+          Endereço é obrigatório
+        </div>
       </div>
     </div>
     <button type="submit" class="btn btn-primary">Salvar</button>
+    <button id="" class="btn btn-danger">Close</button>
   </div>
+  <p>Teachers Values: {{ teachersForm.value | json }}</p>
+  <p>Teachers Status: {{ teachersForm.status | json }}</p>
 </form>

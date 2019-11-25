@@ -1,7 +1,7 @@
-export interface Teachers {
-  nome: String
-  cpf: Number
-  rg: Number
-  telefone: Number
-  endereco: String
-};
+export default interface Teachers {
+  nome: string;
+  cpf: number;
+  rg: number;
+  telefone: number;
+  endereco: string;
+}
