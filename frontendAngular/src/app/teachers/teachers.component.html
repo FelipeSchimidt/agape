@@ -1,3 +1,268 @@
-<h3>Funcionarios</h3>
+<h3 class="subtitle text-center">PROFESSORES</h3>
+<br />
+<div class="d-flex">
+  <div class="form-inline mr-auto">
+    <div class="form-group mb-2">
+      <label for="" class="mr-2">Filtro:</label>
+      <input
+        type="text"
+        class="form-control mr-2"
+        [(ngModel)]="filtroLista"
+        placeholder="Buscar"
+      />
+    </div>
+  </div>
 
-<app-list-teachers></app-list-teachers>
+  <div>
+    <button class="btn btn-outline-primary" (click)="novoFuncionario(template)">
+      <i class="fa fa-plus-circle"></i>&nbsp; Novo Funcionario
+    </button>
+  </div>
+</div>
+<h2>FILTRO: {{ filtroLista }}</h2>
+<table class="table table-hover">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">NOME</th>
+      <th scope="col">CPF</th>
+      <th scope="col">TELEFONE</th>
+      <th scope="col">ENDEREÇO</th>
+      <th scope="colspan"></th>
+    </tr>
+  </thead>
+  <tbody class="">
+    <tr *ngFor="let teacher of teachers">
+      <td>{{ teacher.nome }}</td>
+      <td>{{ teacher.cpf }}</td>
+      <td>{{ teacher.telefone }}</td>
+      <td>{{ teacher.endereco }}</td>
+      <td>
+        <div>
+          <button
+            class="btn btn-primary"
+            id="btn_alterar"
+            (click)="editarFuncionario(teacher, template)"
+          >
+            Alterar
+          </button>
+          <button class="btn btn-danger" id="btn_deletar">Deletar</button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div
+  bsModal
+  #template="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="dialog-sizes-name1"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left">
+          Cadastro de Funcionarios
+        </h4>
+        <button
+          type="button"
+          class="close pull-right"
+          (click)="template.hide()"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="teachersForm" class="needs-validation">
+          <div class="container">
+            <div class="form-row">
+              <div class="form-group col-md-8">
+                <label>Nome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid':
+                      teachersForm.get('nome').errors &&
+                      teachersForm.get('nome').touched
+                  }"
+                  formControlName="nome"
+                />
+                <div
+                  *ngIf="
+                    teachersForm.get('nome').hasError('required') &&
+                    teachersForm.get('nome').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Nome é obrigatório
+                </div>
+                <div
+                  *ngIf="
+                    teachersForm.get('nome').hasError('minlength') &&
+                    teachersForm.get('nome').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Minimo de 5 caracteres.
+                </div>
+                <div
+                  *ngIf="
+                    teachersForm.get('nome').hasError('maxlength') &&
+                    teachersForm.get('nome').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Maximo de 50 caracteres.
+                </div>
+              </div>
+              <div class="form-group col-md-4">
+                <label>telefone</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid':
+                      teachersForm.get('telefone').errors &&
+                      teachersForm.get('telefone').touched
+                  }"
+                  formControlName="telefone"
+                />
+                <div
+                  *ngIf="
+                    teachersForm.get('telefone').hasError('required') &&
+                    teachersForm.get('telefone').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Telefone é obrigatório
+                </div>
+                <div
+                  *ngIf="
+                    teachersForm.get('telefone').hasError('max') &&
+                    teachersForm.get('telefone').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Informe no maximo 11 digitos.
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label>CPF</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid':
+                      teachersForm.get('cpf').errors &&
+                      teachersForm.get('cpf').touched
+                  }"
+                  formControlName="cpf"
+                />
+                <div
+                  *ngIf="
+                    teachersForm.get('cpf').hasError('required') &&
+                    teachersForm.get('cpf').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  CPF é obrigatório
+                </div>
+                <div
+                  *ngIf="teachersForm.get('cpf').hasError('maxlength')"
+                  class="invalid-feedback"
+                >
+                  Informe no maximo 11 digitos.
+                </div>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label>RG</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid':
+                      teachersForm.get('rg').errors &&
+                      teachersForm.get('rg').touched
+                  }"
+                  formControlName="rg"
+                />
+                <div
+                  *ngIf="teachersForm.get('rg').hasError('required')"
+                  class="invalid-feedback"
+                >
+                  RG é obrigatório
+                </div>
+                <div
+                  *ngIf="
+                    teachersForm.get('rg').hasError('maxlength') &&
+                    teachersForm.get('rg').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Informe no maximo 10 digitos.
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label>Endereco</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid':
+                      teachersForm.get('endereco').errors &&
+                      teachersForm.get('endereco').touched
+                  }"
+                  formControlName="endereco"
+                />
+                <div
+                  *ngIf="
+                    teachersForm.get('endereco').hasError('required') &&
+                    teachersForm.get('endereco').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Endereco é obrigatório
+                </div>
+                <div
+                  *ngIf="
+                    teachersForm.get('endereco').hasError('maxlength') &&
+                    teachersForm.get('endereco').touched
+                  "
+                  class="invalid-feedback"
+                >
+                  Maximo de 50 caracteres.
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="modal-footer d-flex">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!teachersForm.valid"
+            (click)="salvarRegistro(template)"
+          >
+            Salvar
+          </button>
+          <button
+            id=""
+            class="btn btn-danger ml-auto"
+            (click)="template.hide()"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
