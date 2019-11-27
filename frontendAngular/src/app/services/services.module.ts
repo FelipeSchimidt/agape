@@ -22,6 +22,8 @@ export class ServicesModule {
     return this.http.post<Teachers>(`${this.baseURL}/professor`, teacher);
   }
 
+  deleteTeachers(teacher: Teachers) {}
+
   /* postTeachers() {
     this.http.post(`${this.baseURL}/professor`, body, options)
   } */

@@ -19,7 +19,7 @@ export class CreateTeachersComponent implements OnInit {
   @Input() createTemplate: any;
   teachers: Teachers[];
   teacher: Teachers;
-  teacherValid: boolean = false;
+  teacherValid = false;
 
   teachersForm: FormGroup;
 

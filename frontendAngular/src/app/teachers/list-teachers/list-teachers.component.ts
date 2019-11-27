@@ -39,4 +39,6 @@ export class ListTeachersComponent implements OnInit {
   openModal(template: any) {
     this.modalRef = this.modalService.show(template);
   }
+
+  deleteTeachers(idTeacher: number) {}
 }
