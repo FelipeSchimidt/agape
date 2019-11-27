@@ -27,7 +27,7 @@
             "scripts": [
               "../frontendAngular/node_modules/jquery/dist/jquery.js",
               "../frontendAngular/node_modules/bootstrap/dist/js/bootstrap.js",
-              "../frontendAngular/node_modules/popper.js/dist/popper.js"
+              "../frontendAngular/node_modules/popper.js/dist/popper.min.js"
             ]
           },
           "configurations": {

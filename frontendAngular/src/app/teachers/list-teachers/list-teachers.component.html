@@ -36,6 +36,8 @@
   </tbody>
 </table>
 
+{{ listTemplates }}
+
 <ng-template #template>
   <div class="modal-header">
     <h3 class="modal-title">Cadastro</h3>
@@ -49,6 +51,6 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-create-teachers></app-create-teachers>
+    <app-create-teachers [createTemplate]="listTemplates"></app-create-teachers>
   </div>
 </ng-template>

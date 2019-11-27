@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { ServicesModule } from 'src/app/services/services.module';
@@ -9,14 +9,19 @@ import { ServicesModule } from 'src/app/services/services.module';
   styleUrls: ['./list-teachers.component.css']
 })
 export class ListTeachersComponent implements OnInit {
+  @Input() template;
+  listTemplates: any;
   teachers: any;
-
   modalRef: BsModalRef;
 
-  constructor(private http: ServicesModule, private modalService: BsModalService) {}
+  constructor(
+    private http: ServicesModule,
+    private modalService: BsModalService
+  ) {}
 
   ngOnInit() {
     this.getTeachers();
+    console.log();
   }
 
   getTeachers() {
@@ -31,7 +36,7 @@ export class ListTeachersComponent implements OnInit {
     );
   }
 
-  openModal(template: TemplateRef<any>) {
+  openModal(template: any) {
     this.modalRef = this.modalService.show(template);
   }
 }

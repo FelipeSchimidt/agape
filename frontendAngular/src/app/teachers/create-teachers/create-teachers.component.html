@@ -1,8 +1,8 @@
-<form formGroup="teachersForm">
+<form [formGroup]="teachersForm" class="needs-validation">
   <div class="container">
     <div class="form-row">
       <div class="form-group col-md-8">
-        <label for="nomeInput">Nome</label>
+        <label>Nome</label>
         <input
           type="text"
           class="form-control"
@@ -11,21 +11,38 @@
               teachersForm.get('nome').errors &&
               teachersForm.get('nome').touched
           }"
-          id="nomeInput"
           formControlName="nome"
         />
         <div
           *ngIf="
             teachersForm.get('nome').hasError('required') &&
-            teachersForm.get('nome').hasError('touched')
+            teachersForm.get('nome').touched
           "
           class="invalid-feedback"
         >
           Nome é obrigatório
         </div>
+        <div
+          *ngIf="
+            teachersForm.get('nome').hasError('minlength') &&
+            teachersForm.get('nome').touched
+          "
+          class="invalid-feedback"
+        >
+          Minimo de 5 caracteres.
+        </div>
+        <div
+          *ngIf="
+            teachersForm.get('nome').hasError('maxlength') &&
+            teachersForm.get('nome').touched
+          "
+          class="invalid-feedback"
+        >
+          Maximo de 50 caracteres.
+        </div>
       </div>
       <div class="form-group col-md-4">
-        <label for="telefoneInput">telefone</label>
+        <label>telefone</label>
         <input
           type="text"
           class="form-control"
@@ -34,17 +51,31 @@
               teachersForm.get('telefone').errors &&
               teachersForm.get('telefone').touched
           }"
-          id="telefoneInput"
           formControlName="telefone"
         />
-        <div class="invalid-feedback">
+        <div
+          *ngIf="
+            teachersForm.get('telefone').hasError('required') &&
+            teachersForm.get('telefone').touched
+          "
+          class="invalid-feedback"
+        >
           Telefone é obrigatório
+        </div>
+        <div
+          *ngIf="
+            teachersForm.get('telefone').hasError('max') &&
+            teachersForm.get('telefone').touched
+          "
+          class="invalid-feedback"
+        >
+          Informe no maximo 11 digitos.
         </div>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="cpfInput">CPF</label>
+        <label>CPF</label>
         <input
           type="text"
           class="form-control"
@@ -52,16 +83,27 @@
             'is-invalid':
               teachersForm.get('cpf').errors && teachersForm.get('cpf').touched
           }"
-          id="cpfInput"
           formControlName="cpf"
         />
-        <div class="invalid-feedback">
+        <div
+          *ngIf="
+            teachersForm.get('cpf').hasError('required') &&
+            teachersForm.get('cpf').touched
+          "
+          class="invalid-feedback"
+        >
           CPF é obrigatório
+        </div>
+        <div
+          *ngIf="teachersForm.get('cpf').hasError('maxlength')"
+          class="invalid-feedback"
+        >
+          Informe no maximo 11 digitos.
         </div>
       </div>
 
       <div class="form-group col-md-6">
-        <label for="rgInput">RG</label>
+        <label>RG</label>
         <input
           type="text"
           class="form-control"
@@ -69,17 +111,28 @@
             'is-invalid':
               teachersForm.get('rg').errors && teachersForm.get('rg').touched
           }"
-          id="rgInput"
           formControlName="rg"
         />
-        <div class="invalid-feedback">
+        <div
+          *ngIf="teachersForm.get('rg').hasError('required')"
+          class="invalid-feedback"
+        >
           RG é obrigatório
+        </div>
+        <div
+          *ngIf="
+            teachersForm.get('rg').hasError('maxlength') &&
+            teachersForm.get('rg').touched
+          "
+          class="invalid-feedback"
+        >
+          Informe no maximo 10 digitos.
         </div>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-12">
-        <label for="enderecoInput">Endereco</label>
+        <label>Endereco</label>
         <input
           type="text"
           class="form-control"
@@ -88,17 +141,36 @@
               teachersForm.get('endereco').errors &&
               teachersForm.get('endereco').touched
           }"
-          id="enderecoInput"
           formControlName="endereco"
         />
-        <div class="invalid-feedback">
-          Endereço é obrigatório
+        <div
+          *ngIf="
+            teachersForm.get('endereco').hasError('required') &&
+            teachersForm.get('endereco').touched
+          "
+          class="invalid-feedback"
+        >
+          Endereco é obrigatório
+        </div>
+        <div
+          *ngIf="
+            teachersForm.get('endereco').hasError('maxlength') &&
+            teachersForm.get('endereco').touched
+          "
+          class="invalid-feedback"
+        >
+          Maximo de 50 caracteres.
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary">Salvar</button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="!teachersForm.valid"
+      (click)="salvarRegistro(createTemplate)"
+    >
+      Salvar
+    </button>
     <button id="" class="btn btn-danger">Close</button>
   </div>
-  <p>Teachers Values: {{ teachersForm.value | json }}</p>
-  <p>Teachers Status: {{ teachersForm.status | json }}</p>
 </form>
