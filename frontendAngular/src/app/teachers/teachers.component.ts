@@ -23,6 +23,7 @@ export class TeachersComponent implements OnInit {
   teachersForm: FormGroup;
 
   filtroLista: string;
+  bodyDeletarProfessor: any;
 
   constructor(private services: ServicesModule, private fb: FormBuilder) {}
 
@@ -57,7 +58,7 @@ export class TeachersComponent implements OnInit {
       cpf: ['', [Validators.required, Validators.maxLength(11)]],
       rg: ['', [Validators.required, Validators.maxLength(10)]],
       telefone: ['', [Validators.required, Validators.maxLength(11)]],
-      endereco: ['', [Validators.required, Validators.maxLength(30)]]
+      endereco: ['', [Validators.required, Validators.maxLength(100)]]
     });
   }
 
@@ -88,7 +89,10 @@ export class TeachersComponent implements OnInit {
           }
         );
       } else {
-        this.teacher = Object.assign({}, this.teachersForm.value);
+        this.teacher = Object.assign(
+          { id: this.teacher.id },
+          this.teachersForm.value
+        );
         this.services.putTeachers(this.teacher).subscribe(
           (novoTeacher: Teachers) => {
             console.log(novoTeacher);
@@ -101,5 +105,23 @@ export class TeachersComponent implements OnInit {
         );
       }
     }
+  }
+
+  confirmeDelete(template: any) {
+    this.services.deleteTeachers(this.teacher.id).subscribe(
+      () => {
+        template.hide();
+        this.getTeachers();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  excluirProfessor(teacher: Teachers, template: any) {
+    this.openModal(template);
+    this.teacher = teacher;
+    this.bodyDeletarProfessor = `Tem certeza que deseja excluir o Professor: ${teacher.nome}`;
   }
 }
