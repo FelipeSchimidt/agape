@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('professor', {
+    return queryInterface.createTable("professor", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,6 +13,10 @@ module.exports = {
         allowNull: false
       },
       cpf: {
+        type: Sequelize.BIGINT,
+        allowNull: false
+      },
+      rg: {
         type: Sequelize.BIGINT,
         allowNull: false
       },
@@ -35,6 +39,6 @@ module.exports = {
     });
   },
   down: (queryInterface /* Sequelize */) => {
-    return queryInterface.dropTable('professor');
+    return queryInterface.dropTable("professor");
   }
 };
