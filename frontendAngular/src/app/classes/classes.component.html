@@ -1,4 +1,4 @@
-<h3 class="subtitle text-center">PROFESSORES</h3>
+<h3 class="subtitle text-center">CLASSES</h3>
 <br />
 <div class="d-flex">
   <div class="form-inline mr-auto">
@@ -14,43 +14,43 @@
   </div>
 
   <div>
-    <button class="btn btn-outline-primary" (click)="novoFuncionario(template)">
-      <i class="fa fa-plus-circle"></i>&nbsp; Novo Funcionario
+    <button class="btn btn-outline-primary" (click)="novaClasse(template)">
+      <i class="fa fa-plus-circle"></i>&nbsp; Nova Classe
     </button>
   </div>
 </div>
-<h2>FILTRO: {{ filtroLista }}</h2>
+
 <table class="table table-hover">
   <thead class="thead-light">
     <tr>
-      <th scope="col">NOME</th>
-      <th scope="col">CPF</th>
-      <th scope="col">RG</th>
-      <th scope="col">TELEFONE</th>
-      <th scope="col">ENDEREÇO</th>
+      <th scope="col">SERIE</th>
+      <th scope="col">TURMA</th>
+      <th scope="col">TURNO</th>
+      <!-- <th scope="col">TELEFONE</th>
+      <th scope="col">ENDEREÇO</th> -->
       <th scope="colspan"></th>
     </tr>
   </thead>
   <tbody class="">
-    <tr *ngFor="let teacher of teachers">
-      <td>{{ teacher.nome }}</td>
-      <td>{{ teacher.cpf }}</td>
-      <td>{{ teacher.rg }}</td>
-      <td>{{ teacher.telefone }}</td>
-      <td>{{ teacher.endereco }}</td>
+    <tr *ngFor="let classe of classes">
+      <td>{{ classe.serie }}</td>
+      <td>{{ classe.turma }}</td>
+      <td>{{ classe.turno }}</td>
+      <!-- <td>{{ classe.professor.nome }}</td>
+      <td>{{ classe.endereco }}</td> -->
       <td>
         <div>
           <button
             class="btn btn-primary"
             id="btn_alterar"
-            (click)="editarFuncionario(teacher, template)"
+            (click)="editarClasses(classe, template)"
           >
             Alterar
           </button>
           <button
             class="btn btn-danger"
             id="btn_deletar"
-            (click)="excluirProfessor(teacher, confirme)"
+            (click)="excluirClasses(classe, confirme)"
           >
             Deletar
           </button>
@@ -72,7 +72,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 id="dialog-sizes-name1" class="modal-title pull-left">
-          Cadastro de Funcionarios
+          Cadastro de Classes
         </h4>
         <button
           type="button"
@@ -84,7 +84,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="teachersForm" class="needs-validation">
+        <form [formGroup]="classesForm" class="needs-validation">
           <div class="container">
             <div class="form-row">
               <div class="form-group col-md-8">
@@ -94,15 +94,15 @@
                   class="form-control"
                   [ngClass]="{
                     'is-invalid':
-                      teachersForm.get('nome').errors &&
-                      teachersForm.get('nome').touched
+                      classesForm.get('nome').errors &&
+                      classesForm.get('nome').touched
                   }"
                   formControlName="nome"
                 />
                 <div
                   *ngIf="
-                    teachersForm.get('nome').hasError('required') &&
-                    teachersForm.get('nome').touched
+                    classesForm.get('nome').hasError('required') &&
+                    classesForm.get('nome').touched
                   "
                   class="invalid-feedback"
                 >
@@ -110,8 +110,8 @@
                 </div>
                 <div
                   *ngIf="
-                    teachersForm.get('nome').hasError('minlength') &&
-                    teachersForm.get('nome').touched
+                    classesForm.get('nome').hasError('minlength') &&
+                    classesForm.get('nome').touched
                   "
                   class="invalid-feedback"
                 >
@@ -119,8 +119,8 @@
                 </div>
                 <div
                   *ngIf="
-                    teachersForm.get('nome').hasError('maxlength') &&
-                    teachersForm.get('nome').touched
+                    classesForm.get('nome').hasError('maxlength') &&
+                    classesForm.get('nome').touched
                   "
                   class="invalid-feedback"
                 >
@@ -134,15 +134,15 @@
                   class="form-control"
                   [ngClass]="{
                     'is-invalid':
-                      teachersForm.get('telefone').errors &&
-                      teachersForm.get('telefone').touched
+                      classesForm.get('telefone').errors &&
+                      classesForm.get('telefone').touched
                   }"
                   formControlName="telefone"
                 />
                 <div
                   *ngIf="
-                    teachersForm.get('telefone').hasError('required') &&
-                    teachersForm.get('telefone').touched
+                    classesForm.get('telefone').hasError('required') &&
+                    classesForm.get('telefone').touched
                   "
                   class="invalid-feedback"
                 >
@@ -150,8 +150,8 @@
                 </div>
                 <div
                   *ngIf="
-                    teachersForm.get('telefone').hasError('max') &&
-                    teachersForm.get('telefone').touched
+                    classesForm.get('telefone').hasError('max') &&
+                    classesForm.get('telefone').touched
                   "
                   class="invalid-feedback"
                 >
@@ -167,22 +167,22 @@
                   class="form-control"
                   [ngClass]="{
                     'is-invalid':
-                      teachersForm.get('cpf').errors &&
-                      teachersForm.get('cpf').touched
+                      classesForm.get('cpf').errors &&
+                      classesForm.get('cpf').touched
                   }"
                   formControlName="cpf"
                 />
                 <div
                   *ngIf="
-                    teachersForm.get('cpf').hasError('required') &&
-                    teachersForm.get('cpf').touched
+                    classesForm.get('cpf').hasError('required') &&
+                    classesForm.get('cpf').touched
                   "
                   class="invalid-feedback"
                 >
                   CPF é obrigatório
                 </div>
                 <div
-                  *ngIf="teachersForm.get('cpf').hasError('maxlength')"
+                  *ngIf="classesForm.get('cpf').hasError('maxlength')"
                   class="invalid-feedback"
                 >
                   Informe no maximo 11 digitos.
@@ -196,21 +196,21 @@
                   class="form-control"
                   [ngClass]="{
                     'is-invalid':
-                      teachersForm.get('rg').errors &&
-                      teachersForm.get('rg').touched
+                      classesForm.get('rg').errors &&
+                      classesForm.get('rg').touched
                   }"
                   formControlName="rg"
                 />
                 <div
-                  *ngIf="teachersForm.get('rg').hasError('required')"
+                  *ngIf="classesForm.get('rg').hasError('required')"
                   class="invalid-feedback"
                 >
                   RG é obrigatório
                 </div>
                 <div
                   *ngIf="
-                    teachersForm.get('rg').hasError('maxlength') &&
-                    teachersForm.get('rg').touched
+                    classesForm.get('rg').hasError('maxlength') &&
+                    classesForm.get('rg').touched
                   "
                   class="invalid-feedback"
                 >
@@ -226,15 +226,15 @@
                   class="form-control"
                   [ngClass]="{
                     'is-invalid':
-                      teachersForm.get('endereco').errors &&
-                      teachersForm.get('endereco').touched
+                      classesForm.get('endereco').errors &&
+                      classesForm.get('endereco').touched
                   }"
                   formControlName="endereco"
                 />
                 <div
                   *ngIf="
-                    teachersForm.get('endereco').hasError('required') &&
-                    teachersForm.get('endereco').touched
+                    classesForm.get('endereco').hasError('required') &&
+                    classesForm.get('endereco').touched
                   "
                   class="invalid-feedback"
                 >
@@ -242,8 +242,8 @@
                 </div>
                 <div
                   *ngIf="
-                    teachersForm.get('endereco').hasError('maxlength') &&
-                    teachersForm.get('endereco').touched
+                    classesForm.get('endereco').hasError('maxlength') &&
+                    classesForm.get('endereco').touched
                   "
                   class="invalid-feedback"
                 >
@@ -257,7 +257,7 @@
           <button
             type="submit"
             class="btn btn-primary"
-            [disabled]="!teachersForm.valid"
+            [disabled]="!classesForm.valid"
             (click)="salvarRegistro(template)"
           >
             Salvar
@@ -299,7 +299,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>{{ bodyDeletarProfessor }}</p>
+        <p>{{ bodyDeletarClasses }}</p>
       </div>
       <div class="modal-footer">
         <button class="btn btn-outline-primary" (click)="confirme.hide()">
