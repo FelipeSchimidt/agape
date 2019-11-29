@@ -11,15 +11,17 @@ import { TeachersModule } from './teachers/teachers.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ClassesComponent } from './classes/classes.component';
 import { routing } from './app.routing';
+import { ClassesModule } from './classes/classes.module';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, NavbarComponent, ClassesComponent],
+  declarations: [AppComponent, HeaderComponent, NavbarComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     TeachersModule,
+    ClassesModule,
     ModalModule.forRoot(),
     routing
   ],

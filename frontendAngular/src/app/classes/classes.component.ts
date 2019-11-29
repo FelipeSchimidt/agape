@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { Classes } from './classes';
+import Classes from './classes';
 import { ServicesModule } from '../services/services.module';
 
 @Component({
@@ -17,7 +17,8 @@ export class ClassesComponent implements OnInit {
   classesForm: FormGroup;
 
   filtroLista: string;
-  bodyDeletarClasses: string;
+  bodyDeletarClasse: string;
+  modoSalvar = 'post';
 
   constructor(
     private fb: FormBuilder,
@@ -25,51 +26,89 @@ export class ClassesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.listarClasses();
     this.validation();
+    this.getClasses();
   }
 
-  validation () {
+  validation() {
     this.classesForm = this.fb.group({
       serie: ['', [Validators.required, Validators.maxLength(20)]],
       turma: ['', [Validators.required, Validators.maxLength(20)]],
       turno: ['', [Validators.required, Validators.maxLength(20)]],
-    })
+      professor: ['', [Validators.required]]
+    });
   }
 
-  listarClasses() {
+  getClasses() {
     this.services.getAllClasses().subscribe(
-      (classes: Classes[]) => {
-        this.classes = classes;
-      }, error => {
-        console.log(error);
+      response => {
+        this.classes = response;
       }
-    )
+    );
   }
 
-  openModal (template: any) {
+  openModal(template: any) {
+    this.classesForm.reset();
     template.show();
   }
 
-  novaClasse (template: any) {
+  novaClasse(template: any) {
+    this.modoSalvar = 'post';
     this.openModal(template);
   }
 
-  editarClasses (classe: Classes, template: any) {
+  editarClasses(classe: Classes, template: any) {
+    this.modoSalvar = 'put';
     template.show();
     this.classe = classe;
+    this.classesForm.patchValue(classe);
   }
 
-  excluirClasses (classe: Classes, template: any) {
+  excluirClasses(classe: Classes, template: any) {
+    this.openModal(template);
+    this.classe = classe;
+    this.bodyDeletarClasse = `Tem certeza que deseja excluir o Professor: ${classe.serie}`;
 
   }
 
   confirmeDelete(template: any) {
+    this.services.deleteClasses(this.classe.id).subscribe(
+      () => {
     template.show();
+    this.getClasses();
+      },
+      error => console.log(error)
+    );
   }
 
   salvarRegistro(template: any) {
-
+    if (this.classesForm.valid) {
+      if (this.modoSalvar === 'post') {
+        this.classe = Object.assign({}, this.classesForm.value);
+        this.services.postClasses(this.classe).subscribe(
+          (classe: Classes) => {
+            console.log(classe)
+            template.hide();
+            this.getClasses();
+          },
+          errors => {
+            console.log(errors);
+          }
+        );
+      } else {
+        this.classe = Object.assign({id: this.classe.id}, this.classesForm.value);
+        this.services.putClasses(this.classe).subscribe(
+          (novaClasse: Classe) => {
+            console.log(novaClasse)
+            template.hide();
+            this.getClasses();
+          },
+           errors => {
+            console.log(errors);
+          }
+        );
+      }
+    }
   }
 
 }

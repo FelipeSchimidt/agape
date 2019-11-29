@@ -1,4 +1,5 @@
 <h3 class="subtitle text-center">CLASSES</h3>
+
 <br />
 <div class="d-flex">
   <div class="form-inline mr-auto">
@@ -27,17 +28,18 @@
       <th scope="col">TURMA</th>
       <th scope="col">TURNO</th>
       <th scope="col">PROFESSORA</th>
-      <!-- <th scope="col">TELEFONE</th>
+      <!-- <th scope="col">turma</th>
       <th scope="col">ENDEREÇO</th> -->
       <th scope="colspan"></th>
     </tr>
   </thead>
   <tbody class="">
     <tr *ngFor="let classe of classes">
-      <td>{{ classe.serie }}</td>
-      <td>{{ classe.turma }}</td>
-      <td>{{ classe.turno }}</td>
-      <td>{{ classe.professora_id.nome }}</td>
+      <td>{{ classe.serie | uppercase }}</td>
+      <td>{{ classe.turma | uppercase }}</td>
+      <td>{{ classe.turno | uppercase }}</td>
+      <td>{{ classe.professor.nome }}</td>
+      <!-- <td>{{ classe.professor_id }}</td> -->
       <!-- <td>{{ classe.professor.nome }}</td>
       <td>{{ classe.endereco }}</td> -->
       <td>
@@ -90,166 +92,124 @@
           <div class="container">
             <div class="form-row">
               <div class="form-group col-md-8">
-                <label>Nome</label>
+                <label>Serie</label>
                 <input
                   type="text"
                   class="form-control"
                   [ngClass]="{
                     'is-invalid':
-                      classesForm.get('nome').errors &&
-                      classesForm.get('nome').touched
+                      classesForm.get('serie').errors &&
+                      classesForm.get('serie').touched
                   }"
-                  formControlName="nome"
+                  formControlName="serie"
                 />
                 <div
                   *ngIf="
-                    classesForm.get('nome').hasError('required') &&
-                    classesForm.get('nome').touched
+                    classesForm.get('serie').hasError('required') &&
+                    classesForm.get('serie').touched
                   "
                   class="invalid-feedback"
                 >
-                  Nome é obrigatório
+                  Serie é obrigatório
                 </div>
                 <div
                   *ngIf="
-                    classesForm.get('nome').hasError('minlength') &&
-                    classesForm.get('nome').touched
+                    classesForm.get('serie').hasError('maxlength') &&
+                    classesForm.get('serie').touched
                   "
                   class="invalid-feedback"
                 >
-                  Minimo de 5 caracteres.
-                </div>
-                <div
-                  *ngIf="
-                    classesForm.get('nome').hasError('maxlength') &&
-                    classesForm.get('nome').touched
-                  "
-                  class="invalid-feedback"
-                >
-                  Maximo de 50 caracteres.
+                  Maximo de 20 caracteres.
                 </div>
               </div>
               <div class="form-group col-md-4">
-                <label>Telefone</label>
+                <label>Turma</label>
                 <input
                   type="text"
                   class="form-control"
                   [ngClass]="{
                     'is-invalid':
-                      classesForm.get('telefone').errors &&
-                      classesForm.get('telefone').touched
+                      classesForm.get('turma').errors &&
+                      classesForm.get('turma').touched
                   }"
-                  formControlName="telefone"
+                  formControlName="turma"
                 />
                 <div
                   *ngIf="
-                    classesForm.get('telefone').hasError('required') &&
-                    classesForm.get('telefone').touched
+                    classesForm.get('turma').hasError('required') &&
+                    classesForm.get('turma').touched
                   "
                   class="invalid-feedback"
                 >
-                  Telefone é obrigatório
+                  Turma é obrigatório
                 </div>
                 <div
                   *ngIf="
-                    classesForm.get('telefone').hasError('max') &&
-                    classesForm.get('telefone').touched
+                    classesForm.get('turma').hasError('maxlenght') &&
+                    classesForm.get('turma').touched
                   "
                   class="invalid-feedback"
                 >
-                  Informe no maximo 11 digitos.
+                  Informe no maximo 20 caracteres.
                 </div>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label>CPF</label>
+                <label>Período</label>
                 <input
                   type="text"
                   class="form-control"
                   [ngClass]="{
                     'is-invalid':
-                      classesForm.get('cpf').errors &&
-                      classesForm.get('cpf').touched
+                      classesForm.get('turno').errors &&
+                      classesForm.get('turno').touched
                   }"
-                  formControlName="cpf"
+                  formControlName="turno"
                 />
                 <div
                   *ngIf="
-                    classesForm.get('cpf').hasError('required') &&
-                    classesForm.get('cpf').touched
+                    classesForm.get('turno').hasError('required') &&
+                    classesForm.get('turno').touched
                   "
                   class="invalid-feedback"
                 >
-                  CPF é obrigatório
+                  Turno é obrigatório
                 </div>
                 <div
-                  *ngIf="classesForm.get('cpf').hasError('maxlength')"
+                  *ngIf="classesForm.get('turno').hasError('maxlength')"
                   class="invalid-feedback"
                 >
-                  Informe no maximo 11 digitos.
+                  Informe no maximo 20 caracteres.
                 </div>
               </div>
 
               <div class="form-group col-md-6">
-                <label>RG</label>
+                <label>Professor</label>
                 <input
                   type="text"
                   class="form-control"
                   [ngClass]="{
                     'is-invalid':
-                      classesForm.get('rg').errors &&
-                      classesForm.get('rg').touched
+                      classesForm.get('professor').errors &&
+                      classesForm.get('professor').touched
                   }"
-                  formControlName="rg"
+                  formControlName="professor"
                 />
                 <div
-                  *ngIf="classesForm.get('rg').hasError('required')"
+                  *ngIf="classesForm.get('professor').hasError('required')"
                   class="invalid-feedback"
                 >
-                  RG é obrigatório
+                  Professor é obrigatório
                 </div>
                 <div
                   *ngIf="
-                    classesForm.get('rg').hasError('maxlength') &&
-                    classesForm.get('rg').touched
+                    classesForm.get('professor').hasError('maxlength') &&
+                    classesForm.get('professor').touched
                   "
                   class="invalid-feedback"
                 >
                   Informe no maximo 10 digitos.
-                </div>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-12">
-                <label>Endereco</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  [ngClass]="{
-                    'is-invalid':
-                      classesForm.get('endereco').errors &&
-                      classesForm.get('endereco').touched
-                  }"
-                  formControlName="endereco"
-                />
-                <div
-                  *ngIf="
-                    classesForm.get('endereco').hasError('required') &&
-                    classesForm.get('endereco').touched
-                  "
-                  class="invalid-feedback"
-                >
-                  Endereco é obrigatório
-                </div>
-                <div
-                  *ngIf="
-                    classesForm.get('endereco').hasError('maxlength') &&
-                    classesForm.get('endereco').touched
-                  "
-                  class="invalid-feedback"
-                >
-                  Maximo de 50 caracteres.
                 </div>
               </div>
             </div>
@@ -301,7 +261,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>{{ bodyDeletarClasses }}</p>
+        <p>{{ bodyDeletarClasse }}</p>
       </div>
       <div class="modal-footer">
         <button class="btn btn-outline-primary" (click)="confirme.hide()">
