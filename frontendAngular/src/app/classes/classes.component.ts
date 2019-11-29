@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Classes } from './classes';
+import { ServicesModule } from '../services/services.module';
 
 @Component({
   selector: 'app-classes',
@@ -19,10 +20,13 @@ export class ClassesComponent implements OnInit {
   bodyDeletarClasses: string;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private services: ServicesModule
   ) { }
 
   ngOnInit() {
+    this.listarClasses();
+    this.validation();
   }
 
   validation () {
@@ -32,6 +36,17 @@ export class ClassesComponent implements OnInit {
       turno: ['', [Validators.required, Validators.maxLength(20)]],
     })
   }
+
+  listarClasses() {
+    this.services.getAllClasses().subscribe(
+      (classes: Classes[]) => {
+        this.classes = classes;
+      }, error => {
+        console.log(error);
+      }
+    )
+  }
+
   openModal (template: any) {
     template.show();
   }

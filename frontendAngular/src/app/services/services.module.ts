@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import Teachers from '../teachers/teachers';
+import { Classes } from '../classes/classes';
 
 @NgModule({
   declarations: [],
@@ -33,7 +34,7 @@ export class ServicesModule {
     return this.http.delete(`${this.baseURL}/professor/${id}`);
   }
 
-  /* postTeachers() {
-    this.http.post(`${this.baseURL}/professor`, body, options)
-  } */
+  getAllClasses(): Observable<Classeses[]> {
+    return this.http.get<Classes[]> (`${this.baseURL}/classes`);
+  }
 }
