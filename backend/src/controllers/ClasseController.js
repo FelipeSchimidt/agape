@@ -1,4 +1,4 @@
-const Classes = require('../models/Classes');
+const Classes = require("../models/Classes");
 
 module.exports = {
   async index(req, res) {
@@ -12,7 +12,7 @@ module.exports = {
 
     const classe = await Classes.findByPk(classe_id);
     if (!classe) {
-      return res.status(404).json({ error: 'Classe não encontrada' });
+      return res.status(404).json({ error: "Classe não encontrada" });
     }
   },
 

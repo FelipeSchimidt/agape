@@ -17,7 +17,9 @@ class Professor extends Model {
     );
   }
 
-  static associate(/* models */) {}
+  static associate(/* models */) {
+    //this.hasOne(models.Classes, { foreignKey: "classe_id", as: "classes" });
+  }
 }
 
 module.exports = Professor;
