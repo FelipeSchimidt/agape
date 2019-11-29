@@ -2,7 +2,11 @@ const Classes = require("../models/Classes");
 
 module.exports = {
   async index(req, res) {
-    const classe = await Classes.findAll();
+    const classe = await Classes.findAll({
+      include: {
+        association: "professor"
+      }
+    });
 
     return res.json(classe);
   },
