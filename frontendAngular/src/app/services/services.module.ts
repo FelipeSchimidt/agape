@@ -39,14 +39,14 @@ export class ServicesModule {
   }
 
   postClasses(classes: Classes) {
-    return this.http.post(`${this.baseURL}/classe`, classes);
+    return this.http.post(`${this.baseURL}/classes`, classes);
   }
 
   putClasses(classes: Classes) {
-    return this.http.put(`${this.baseURL}/classe/${classes.id}`, classes)
+    return this.http.put(`${this.baseURL}/classes/${classes.id}`, classes)
   }
 
   deleteClasses(id: number) {
-    return this.http.delete(`${this.baseURL}/classe/${id}`);
+    return this.http.delete(`${this.baseURL}/classes/${id}`);
   }
 }

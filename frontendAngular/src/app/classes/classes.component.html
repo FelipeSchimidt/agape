@@ -186,7 +186,23 @@
 
               <div class="form-group col-md-6">
                 <label>Professor</label>
-                <input
+                <select
+                  id="inputSelectProfessor"
+                  class="form-control custom-select"
+                >
+                  <option
+                    value="professor.id"
+                    *ngFor="let professor of listaProfessor"
+                    [ngClass]="{
+                      'is-invalid':
+                        classesForm.get('professor').errors &&
+                        classesForm.get('professor').touched
+                    }"
+                    formControlName="professor"
+                    >{{ professor.nome }}</option
+                  >
+                </select>
+                <!-- <input
                   type="text"
                   class="form-control"
                   [ngClass]="{
@@ -195,7 +211,7 @@
                       classesForm.get('professor').touched
                   }"
                   formControlName="professor"
-                />
+                /> -->
                 <div
                   *ngIf="classesForm.get('professor').hasError('required')"
                   class="invalid-feedback"

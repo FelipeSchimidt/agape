@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import Classes from './classes';
+import Teachers from '../teachers/teachers';
 import { ServicesModule } from '../services/services.module';
 
 @Component({
@@ -16,6 +17,7 @@ export class ClassesComponent implements OnInit {
 
   classesForm: FormGroup;
 
+  listaProfessor: Teachers[];
   filtroLista: string;
   bodyDeletarClasse: string;
   modoSalvar = 'post';
@@ -28,6 +30,7 @@ export class ClassesComponent implements OnInit {
   ngOnInit() {
     this.validation();
     this.getClasses();
+    this.getProfessores();
   }
 
   validation() {
@@ -45,6 +48,16 @@ export class ClassesComponent implements OnInit {
         this.classes = response;
       }
     );
+  }
+
+  getProfessores() {
+    this.services.getAllTeachers().subscribe(
+      response => {
+        this.listaProfessor = response;
+      }, error => {
+        console.log(error);
+      }
+    )
   }
 
   openModal(template: any) {
@@ -67,15 +80,15 @@ export class ClassesComponent implements OnInit {
   excluirClasses(classe: Classes, template: any) {
     this.openModal(template);
     this.classe = classe;
-    this.bodyDeletarClasse = `Tem certeza que deseja excluir o Professor: ${classe.serie}`;
+    this.bodyDeletarClasse = `Tem certeza que deseja excluir a CLasse: ${this.classe.serie}`;
 
   }
 
   confirmeDelete(template: any) {
     this.services.deleteClasses(this.classe.id).subscribe(
       () => {
-    template.show();
-    this.getClasses();
+      template.hide();
+      this.getClasses();
       },
       error => console.log(error)
     );
@@ -98,7 +111,7 @@ export class ClassesComponent implements OnInit {
       } else {
         this.classe = Object.assign({id: this.classe.id}, this.classesForm.value);
         this.services.putClasses(this.classe).subscribe(
-          (novaClasse: Classe) => {
+          (novaClasse: Classes) => {
             console.log(novaClasse)
             template.hide();
             this.getClasses();
