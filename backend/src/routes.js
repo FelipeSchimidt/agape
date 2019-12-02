@@ -20,8 +20,10 @@ route.put("/parentes/:parentes_cpf", ParenteController.update);
 route.delete("/parentes/:parentes_cpf", ParenteController.delete);
 
 route.get("/classes", ClasseController.index);
-route.get("/classes/:classe_id", ClasseController.show);
+route.get("/classes/:id", ClasseController.show);
 route.post("/classes", ClasseController.store);
+route.put("/classes/:id", ClasseController.update);
+route.delete("/classes/:id", ClasseController.delete);
 
 route.get("/professor", ProfessorController.index);
 route.post("/professor", ProfessorController.store);
