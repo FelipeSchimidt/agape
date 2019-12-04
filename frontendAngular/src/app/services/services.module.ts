@@ -22,7 +22,16 @@ export class ServicesModule {
     return this.http.post<Teachers>(`${this.baseURL}/professor`, teacher);
   }
 
-  deleteTeachers(teacher: Teachers) {}
+  putTeachers(teacher: Teachers) {
+    return this.http.put<Teachers>(
+      `${this.baseURL}/professor/${teacher.id}`,
+      teacher
+    );
+  }
+
+  deleteTeachers(id: number) {
+    return this.http.delete(`${this.baseURL}/professor/${id}`);
+  }
 
   /* postTeachers() {
     this.http.post(`${this.baseURL}/professor`, body, options)

@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
 
 class Professor extends Model {
   static init(sequelize) {
@@ -6,17 +6,20 @@ class Professor extends Model {
       {
         nome: DataTypes.STRING,
         cpf: DataTypes.BIGINT,
+        rg: DataTypes.BIGINT,
         telefone: DataTypes.BIGINT,
         endereco: DataTypes.STRING
       },
       {
         sequelize,
-        tableName: 'professor'
+        tableName: "professor"
       }
     );
   }
 
-  static associate(/* models */) {}
+  static associate(/* models */) {
+    //this.hasOne(models.Classes, { foreignKey: "classe_id", as: "classes" });
+  }
 }
 
 module.exports = Professor;
