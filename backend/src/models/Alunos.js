@@ -1,9 +1,10 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
 
 class Aluno extends Model {
   static init(sequelize) {
     super.init(
       {
+        matricula: DataTypes.INTEGER,
         nome: DataTypes.STRING,
         rg: DataTypes.BIGINT,
         cpf: DataTypes.BIGINT,
@@ -19,15 +20,15 @@ class Aluno extends Model {
 
   static associate(models) {
     this.belongsToMany(models.Classe, {
-      foreignKey: 'aluno_id',
-      through: 'classesAlunos',
-      as: 'classes'
+      foreignKey: "aluno_id",
+      through: "classesAlunos",
+      as: "classes"
     });
 
     this.belongsToMany(models.Parente, {
-      foreignKey: 'alunos_id',
-      through: 'alunosParentes',
-      as: 'parentes'
+      foreignKey: "alunos_id",
+      through: "alunosParentes",
+      as: "parentes"
     });
   }
 }

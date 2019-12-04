@@ -5,13 +5,13 @@ const ClasseController = require("./controllers/ClasseController");
 const ProfessorController = require("./controllers/ProfessorController");
 
 route.get("/alunos", AlunoController.index);
-route.get("/aluno/:id", AlunoController.show);
+route.get("/aluno/:matricula", AlunoController.show);
 route.post(
   "/parentes/:parentes_cpf/aluno/classe/:classe_id",
   AlunoController.store
 );
-route.put("/parentes/:parentes_cpf/aluno/:id", AlunoController.update);
-route.delete("/parentes/:parentes_cpf/aluno/:aluno_id", AlunoController.delete);
+route.put("/aluno/:matricula", AlunoController.update);
+route.delete("/aluno/:matricula", AlunoController.delete);
 
 route.get("/parentes", ParenteController.index);
 route.get("/parentes/:parentes_cpf", ParenteController.show);

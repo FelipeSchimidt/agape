@@ -1,22 +1,25 @@
-const Parente = require('../models/Parentes');
-//const Aluno = require('../models/Alunos');
+const Parente = require("../models/Parentes");
+const Aluno = require("../models/Alunos");
 
 module.exports = {
   async index(req, res) {
     const parente = await Parente.findAll();
 
     if (!parente) {
-      return res.status(404).json({ error: 'Parentes não encontrados' });
+      return res.status(404).json({ error: "Parentes não encontrados" });
     }
     return res.json(parente);
   },
 
   async show(req, res) {
     const { parentes_cpf } = req.params;
-    const parente = await Parente.findOne({ parentes_cpf });
+    const parente = await Parente.findAll({
+      where: { cpf: parentes_cpf },
+      include: [{ model: Aluno, as: "alunos" }]
+    });
 
     if (!parente) {
-      return res.status(404).json({ error: 'Parente não encontrado' });
+      return res.status(404).json({ error: "Parente não encontrado" });
     }
 
     return res.json(parente);
@@ -34,7 +37,7 @@ module.exports = {
     const parente = await Parente.findOne({ parentes_cpf });
 
     if (!parente) {
-      return res.status(404).json({ error: 'Parente não encontrado' });
+      return res.status(404).json({ error: "Parente não encontrado" });
     }
 
     parente.update(req.body);
@@ -48,7 +51,7 @@ module.exports = {
     const parente = await Parente.findOne({ parentes_cpf });
 
     if (!parente) {
-      return res.status(404).json({ error: 'Parente não encontrado' });
+      return res.status(404).json({ error: "Parente não encontrado" });
     }
 
     parente.destroy();

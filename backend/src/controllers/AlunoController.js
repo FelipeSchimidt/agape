@@ -1,6 +1,6 @@
-const Aluno = require('../models/Alunos');
-const Parente = require('../models/Parentes');
-const Classe = require('../models/Classes');
+const Aluno = require("../models/Alunos");
+const Parente = require("../models/Parentes");
+const Classe = require("../models/Classes");
 
 module.exports = {
   async index(req, res) {
@@ -10,8 +10,11 @@ module.exports = {
   },
 
   async show(req, res) {
-    const { id } = req.params;
-    const aluno = await Aluno.findByPk(id);
+    const { matricula } = req.params;
+    const aluno = await Aluno.findAll({
+      where: { matricula },
+      include: [{ model: Parente, as: "parentes" }]
+    });
 
     return res.json(aluno);
   },
@@ -22,13 +25,13 @@ module.exports = {
     const parente = await Parente.findOne({ cpf: parentes_cpf });
     console.log(parente);
     if (!parente) {
-      return res.status(404).json({ error: 'Familiar não encontrado' });
+      return res.status(404).json({ error: "Familiar não encontrado" });
     }
 
     const classe = await Classe.findByPk(classe_id);
 
     if (!classe) {
-      return res.status(404).json({ error: 'Classe não cadastrada' });
+      return res.status(404).json({ error: "Classe não cadastrada" });
     }
 
     const [aluno, created] = await Aluno.findOrCreate({
@@ -36,7 +39,7 @@ module.exports = {
     });
 
     if (!created) {
-      return res.status(404).json({ error: 'Aluno não cadastrado' });
+      return res.status(404).json({ error: "Aluno não cadastrado" });
     }
     await parente.addAlunos(aluno);
     await classe.addAlunos(aluno);
@@ -45,12 +48,12 @@ module.exports = {
   },
 
   async update(req, res) {
-    const { id } = req.params;
+    const { matricula } = req.params;
 
-    const aluno = await Aluno.findByPk(id);
+    const aluno = await Aluno.findOne({ matricula });
 
     if (!aluno) {
-      return res.status(400).json({ error: 'Aluno não encontrado' });
+      return res.status(400).json({ error: "Aluno não encontrado" });
     }
     await aluno.update(req.body);
 
@@ -58,21 +61,14 @@ module.exports = {
   },
 
   async delete(req, res) {
-    const { parentes_cpf, aluno_id } = req.params;
+    const { matricula } = req.params;
 
-    const parente = await Parente.findOne({ parentes_cpf });
-
-    if (!parente) {
-      return res.status(404).json({ error: 'Familiar não encontrado' });
-    }
-    const aluno = await Aluno.findByPk(aluno_id);
+    const aluno = await Aluno.findOne({ matricula });
 
     if (!aluno) {
-      return res.status(400).json({ error: 'Aluno não encontrado' });
+      return res.status(400).json({ error: "Aluno não encontrado" });
     }
 
-    await parente.removeAluno(aluno);
-
-    return res.json({ msg: 'Cadastro de aluno deletado' });
+    return res.json({ msg: "Cadastro de aluno deletado" });
   }
 };
