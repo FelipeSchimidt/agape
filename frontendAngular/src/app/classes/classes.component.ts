@@ -11,21 +11,18 @@ import { ServicesModule } from '../services/services.module';
   styleUrls: ['./classes.component.css']
 })
 export class ClassesComponent implements OnInit {
-
   classes: Classes[];
   classe: Classes;
+  professores: Teachers[];
 
   classesForm: FormGroup;
 
-  listaProfessor: Teachers[];
   filtroLista: string;
   bodyDeletarClasse: string;
   modoSalvar = 'post';
+  periodos: string[] = ['manhã', 'tarde'];
 
-  constructor(
-    private fb: FormBuilder,
-    private services: ServicesModule
-  ) { }
+  constructor(private fb: FormBuilder, private services: ServicesModule) {}
 
   ngOnInit() {
     this.validation();
@@ -38,26 +35,25 @@ export class ClassesComponent implements OnInit {
       serie: ['', [Validators.required, Validators.maxLength(20)]],
       turma: ['', [Validators.required, Validators.maxLength(20)]],
       turno: ['', [Validators.required, Validators.maxLength(20)]],
-      professor: ['', [Validators.required]]
+      professor_id: ['', [Validators.required]]
     });
   }
 
   getClasses() {
-    this.services.getAllClasses().subscribe(
-      response => {
-        this.classes = response;
-      }
-    );
+    this.services.getAllClasses().subscribe(response => {
+      this.classes = response;
+    });
   }
 
   getProfessores() {
     this.services.getAllTeachers().subscribe(
       response => {
-        this.listaProfessor = response;
-      }, error => {
+        this.professores = response;
+      },
+      error => {
         console.log(error);
       }
-    )
+    );
   }
 
   openModal(template: any) {
@@ -81,14 +77,13 @@ export class ClassesComponent implements OnInit {
     this.openModal(template);
     this.classe = classe;
     this.bodyDeletarClasse = `Tem certeza que deseja excluir a CLasse: ${this.classe.serie}`;
-
   }
 
   confirmeDelete(template: any) {
     this.services.deleteClasses(this.classe.id).subscribe(
       () => {
-      template.hide();
-      this.getClasses();
+        template.hide();
+        this.getClasses();
       },
       error => console.log(error)
     );
@@ -100,7 +95,7 @@ export class ClassesComponent implements OnInit {
         this.classe = Object.assign({}, this.classesForm.value);
         this.services.postClasses(this.classe).subscribe(
           (classe: Classes) => {
-            console.log(classe)
+            console.log(classe);
             template.hide();
             this.getClasses();
           },
@@ -109,19 +104,21 @@ export class ClassesComponent implements OnInit {
           }
         );
       } else {
-        this.classe = Object.assign({id: this.classe.id}, this.classesForm.value);
+        this.classe = Object.assign(
+          { id: this.classe.id },
+          this.classesForm.value
+        );
         this.services.putClasses(this.classe).subscribe(
           (novaClasse: Classes) => {
-            console.log(novaClasse)
+            console.log(novaClasse);
             template.hide();
             this.getClasses();
           },
-           errors => {
+          errors => {
             console.log(errors);
           }
         );
       }
     }
   }
-
 }
