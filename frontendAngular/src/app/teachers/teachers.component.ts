@@ -78,9 +78,10 @@ export class TeachersComponent implements OnInit {
     if (this.teachersForm.valid) {
       if (this.modoSalvar === 'post') {
         this.teacher = Object.assign({}, this.teachersForm.value);
+        console.log(this.teacher);
         this.services.postTeachers(this.teacher).subscribe(
-          (novoTeacher: Teachers) => {
-            console.log(novoTeacher);
+          response => {
+            console.log(response);
             template.hide();
             this.getTeachers();
           },
@@ -94,8 +95,8 @@ export class TeachersComponent implements OnInit {
           this.teachersForm.value
         );
         this.services.putTeachers(this.teacher).subscribe(
-          (novoTeacher: Teachers) => {
-            console.log(novoTeacher);
+          response => {
+            console.log(response);
             template.hide();
             this.getTeachers();
           },
