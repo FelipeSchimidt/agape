@@ -157,31 +157,23 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label>Período</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  [ngClass]="{
-                    'is-invalid':
-                      classesForm.get('turno').errors &&
-                      classesForm.get('turno').touched
-                  }"
+                <select
+                  id="inputSelectTurno"
+                  class="form-control custom-select"
                   formControlName="turno"
-                />
-                <div
-                  *ngIf="
-                    classesForm.get('turno').hasError('required') &&
-                    classesForm.get('turno').touched
-                  "
-                  class="invalid-feedback"
                 >
-                  Turno é obrigatório
-                </div>
-                <div
-                  *ngIf="classesForm.get('turno').hasError('maxlength')"
-                  class="invalid-feedback"
-                >
-                  Informe no maximo 20 caracteres.
-                </div>
+                  <option
+                    *ngFor="let turno of periodos"
+                    [ngClass]="{
+                      'is-invalid':
+                        classesForm.get('turno').errors &&
+                        classesForm.get('turno').touched
+                    }"
+                    [value]="turno"
+                  >
+                    {{ turno }}
+                  </option>
+                </select>
               </div>
 
               <div class="form-group col-md-6">
@@ -189,43 +181,24 @@
                 <select
                   id="inputSelectProfessor"
                   class="form-control custom-select"
+                  formControlName="professor_id"
                 >
                   <option
-                    value="professor.id"
-                    *ngFor="let professor of listaProfessor"
+                    *ngFor="let professor_id of professores"
                     [ngClass]="{
                       'is-invalid':
-                        classesForm.get('professor').errors &&
-                        classesForm.get('professor').touched
+                        classesForm.get('professor_id').errors &&
+                        classesForm.get('professor_id').touched
                     }"
-                    formControlName="professor"
-                    >{{ professor.nome }}</option
+                    [value]="professor_id.id"
+                    >{{ professor_id.nome }}</option
                   >
                 </select>
-                <!-- <input
-                  type="text"
-                  class="form-control"
-                  [ngClass]="{
-                    'is-invalid':
-                      classesForm.get('professor').errors &&
-                      classesForm.get('professor').touched
-                  }"
-                  formControlName="professor"
-                /> -->
                 <div
-                  *ngIf="classesForm.get('professor').hasError('required')"
+                  *ngIf="classesForm.get('professor_id').hasError('required')"
                   class="invalid-feedback"
                 >
                   Professor é obrigatório
-                </div>
-                <div
-                  *ngIf="
-                    classesForm.get('professor').hasError('maxlength') &&
-                    classesForm.get('professor').touched
-                  "
-                  class="invalid-feedback"
-                >
-                  Informe no maximo 10 digitos.
                 </div>
               </div>
             </div>

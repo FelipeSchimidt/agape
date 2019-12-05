@@ -9,9 +9,10 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { TeachersModule } from './teachers/teachers.module';
 import { NavbarComponent } from './navbar/navbar.component';
-import { ClassesComponent } from './classes/classes.component';
-import { routing } from './app.routing';
 import { ClassesModule } from './classes/classes.module';
+import { AlunosModule } from './alunos/alunos.module';
+
+import { routing } from './app.routing';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, NavbarComponent],
@@ -22,6 +23,7 @@ import { ClassesModule } from './classes/classes.module';
     ReactiveFormsModule,
     TeachersModule,
     ClassesModule,
+    AlunosModule,
     ModalModule.forRoot(),
     routing
   ],
