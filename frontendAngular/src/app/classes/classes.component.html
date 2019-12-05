@@ -1,4 +1,5 @@
-<h3 class="subtitle text-center">PROFESSORES</h3>
+<h3 class="subtitle text-center">CLASSES</h3>
+
 <br />
 <div class="d-flex">
   <div class="form-inline mr-auto">
@@ -14,45 +15,46 @@
   </div>
 
   <div>
-    <button class="btn btn-outline-primary" (click)="novoFuncionario(template)">
-      <i class="fa fa-plus-circle"></i>&nbsp; Novo Funcionario
+    <button class="btn btn-outline-primary" (click)="novaClasse(template)">
+      <i class="fa fa-plus-circle"></i>&nbsp; Nova Classe
     </button>
   </div>
 </div>
-<h2>FILTRO: {{ filtroLista }}</h2>
+
 <table class="table table-hover">
   <thead class="thead-light">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">NOME</th>
-      <th scope="col">CPF</th>
-      <th scope="col">RG</th>
-      <th scope="col">TELEFONE</th>
-      <th scope="col">ENDEREÇO</th>
+      <th scope="col">SERIE</th>
+      <th scope="col">TURMA</th>
+      <th scope="col">TURNO</th>
+      <th scope="col">PROFESSORA</th>
+      <!-- <th scope="col">turma</th>
+      <th scope="col">ENDEREÇO</th> -->
       <th scope="colspan"></th>
     </tr>
   </thead>
   <tbody class="">
-    <tr *ngFor="let teacher of teachers">
-      <td>{{ teacher.id }}</td>
-      <td>{{ teacher.nome }}</td>
-      <td>{{ teacher.cpf }}</td>
-      <td>{{ teacher.rg }}</td>
-      <td>{{ teacher.telefone }}</td>
-      <td>{{ teacher.endereco }}</td>
+    <tr *ngFor="let classe of classes">
+      <td>{{ classe.serie | uppercase }}</td>
+      <td>{{ classe.turma | uppercase }}</td>
+      <td>{{ classe.turno | uppercase }}</td>
+      <td>{{ classe.professor.nome }}</td>
+      <!-- <td>{{ classe.professor_id }}</td> -->
+      <!-- <td>{{ classe.professor.nome }}</td>
+      <td>{{ classe.endereco }}</td> -->
       <td>
         <div>
           <button
             class="btn btn-primary"
             id="btn_alterar"
-            (click)="editarFuncionario(teacher, template)"
+            (click)="editarClasses(classe, template)"
           >
             Alterar
           </button>
           <button
             class="btn btn-danger"
             id="btn_deletar"
-            (click)="excluirProfessor(teacher, confirme)"
+            (click)="excluirClasses(classe, confirme)"
           >
             Deletar
           </button>
@@ -74,7 +76,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 id="dialog-sizes-name1" class="modal-title pull-left">
-          Cadastro de Funcionarios
+          Cadastro de Classes
         </h4>
         <button
           type="button"
@@ -86,170 +88,144 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="teachersForm" class="needs-validation">
+        <form [formGroup]="classesForm" class="needs-validation">
           <div class="container">
             <div class="form-row">
               <div class="form-group col-md-8">
-                <label>Nome</label>
+                <label>Serie</label>
                 <input
                   type="text"
                   class="form-control"
                   [ngClass]="{
                     'is-invalid':
-                      teachersForm.get('nome').errors &&
-                      teachersForm.get('nome').touched
+                      classesForm.get('serie').errors &&
+                      classesForm.get('serie').touched
                   }"
-                  formControlName="nome"
+                  formControlName="serie"
                 />
                 <div
                   *ngIf="
-                    teachersForm.get('nome').hasError('required') &&
-                    teachersForm.get('nome').touched
+                    classesForm.get('serie').hasError('required') &&
+                    classesForm.get('serie').touched
                   "
                   class="invalid-feedback"
                 >
-                  Nome é obrigatório
+                  Serie é obrigatório
                 </div>
                 <div
                   *ngIf="
-                    teachersForm.get('nome').hasError('minlength') &&
-                    teachersForm.get('nome').touched
+                    classesForm.get('serie').hasError('maxlength') &&
+                    classesForm.get('serie').touched
                   "
                   class="invalid-feedback"
                 >
-                  Minimo de 5 caracteres.
-                </div>
-                <div
-                  *ngIf="
-                    teachersForm.get('nome').hasError('maxlength') &&
-                    teachersForm.get('nome').touched
-                  "
-                  class="invalid-feedback"
-                >
-                  Maximo de 50 caracteres.
+                  Maximo de 20 caracteres.
                 </div>
               </div>
               <div class="form-group col-md-4">
-                <label>Telefone</label>
+                <label>Turma</label>
                 <input
                   type="text"
                   class="form-control"
                   [ngClass]="{
                     'is-invalid':
-                      teachersForm.get('telefone').errors &&
-                      teachersForm.get('telefone').touched
+                      classesForm.get('turma').errors &&
+                      classesForm.get('turma').touched
                   }"
-                  formControlName="telefone"
+                  formControlName="turma"
                 />
                 <div
                   *ngIf="
-                    teachersForm.get('telefone').hasError('required') &&
-                    teachersForm.get('telefone').touched
+                    classesForm.get('turma').hasError('required') &&
+                    classesForm.get('turma').touched
                   "
                   class="invalid-feedback"
                 >
-                  Telefone é obrigatório
+                  Turma é obrigatório
                 </div>
                 <div
                   *ngIf="
-                    teachersForm.get('telefone').hasError('max') &&
-                    teachersForm.get('telefone').touched
+                    classesForm.get('turma').hasError('maxlenght') &&
+                    classesForm.get('turma').touched
                   "
                   class="invalid-feedback"
                 >
-                  Informe no maximo 11 digitos.
+                  Informe no maximo 20 caracteres.
                 </div>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label>CPF</label>
+                <label>Período</label>
                 <input
                   type="text"
                   class="form-control"
                   [ngClass]="{
                     'is-invalid':
-                      teachersForm.get('cpf').errors &&
-                      teachersForm.get('cpf').touched
+                      classesForm.get('turno').errors &&
+                      classesForm.get('turno').touched
                   }"
-                  formControlName="cpf"
+                  formControlName="turno"
                 />
                 <div
                   *ngIf="
-                    teachersForm.get('cpf').hasError('required') &&
-                    teachersForm.get('cpf').touched
+                    classesForm.get('turno').hasError('required') &&
+                    classesForm.get('turno').touched
                   "
                   class="invalid-feedback"
                 >
-                  CPF é obrigatório
+                  Turno é obrigatório
                 </div>
                 <div
-                  *ngIf="teachersForm.get('cpf').hasError('maxlength')"
+                  *ngIf="classesForm.get('turno').hasError('maxlength')"
                   class="invalid-feedback"
                 >
-                  Informe no maximo 11 digitos.
+                  Informe no maximo 20 caracteres.
                 </div>
               </div>
 
               <div class="form-group col-md-6">
-                <label>RG</label>
-                <input
+                <label>Professor</label>
+                <select
+                  id="inputSelectProfessor"
+                  class="form-control custom-select"
+                >
+                  <option
+                    value="professor.id"
+                    *ngFor="let professor of listaProfessor"
+                    [ngClass]="{
+                      'is-invalid':
+                        classesForm.get('professor').errors &&
+                        classesForm.get('professor').touched
+                    }"
+                    formControlName="professor"
+                    >{{ professor.nome }}</option
+                  >
+                </select>
+                <!-- <input
                   type="text"
                   class="form-control"
                   [ngClass]="{
                     'is-invalid':
-                      teachersForm.get('rg').errors &&
-                      teachersForm.get('rg').touched
+                      classesForm.get('professor').errors &&
+                      classesForm.get('professor').touched
                   }"
-                  formControlName="rg"
-                />
+                  formControlName="professor"
+                /> -->
                 <div
-                  *ngIf="teachersForm.get('rg').hasError('required')"
+                  *ngIf="classesForm.get('professor').hasError('required')"
                   class="invalid-feedback"
                 >
-                  RG é obrigatório
+                  Professor é obrigatório
                 </div>
                 <div
                   *ngIf="
-                    teachersForm.get('rg').hasError('maxlength') &&
-                    teachersForm.get('rg').touched
+                    classesForm.get('professor').hasError('maxlength') &&
+                    classesForm.get('professor').touched
                   "
                   class="invalid-feedback"
                 >
                   Informe no maximo 10 digitos.
-                </div>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-12">
-                <label>Endereco</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  [ngClass]="{
-                    'is-invalid':
-                      teachersForm.get('endereco').errors &&
-                      teachersForm.get('endereco').touched
-                  }"
-                  formControlName="endereco"
-                />
-                <div
-                  *ngIf="
-                    teachersForm.get('endereco').hasError('required') &&
-                    teachersForm.get('endereco').touched
-                  "
-                  class="invalid-feedback"
-                >
-                  Endereco é obrigatório
-                </div>
-                <div
-                  *ngIf="
-                    teachersForm.get('endereco').hasError('maxlength') &&
-                    teachersForm.get('endereco').touched
-                  "
-                  class="invalid-feedback"
-                >
-                  Maximo de 50 caracteres.
                 </div>
               </div>
             </div>
@@ -259,7 +235,7 @@
           <button
             type="submit"
             class="btn btn-primary"
-            [disabled]="!teachersForm.valid"
+            [disabled]="!classesForm.valid"
             (click)="salvarRegistro(template)"
           >
             Salvar
@@ -301,7 +277,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>{{ bodyDeletarProfessor }}</p>
+        <p>{{ bodyDeletarClasse }}</p>
       </div>
       <div class="modal-footer">
         <button class="btn btn-outline-primary" (click)="confirme.hide()">
