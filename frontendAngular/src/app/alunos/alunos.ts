@@ -1,4 +1,5 @@
 export default interface Alunos {
+  matricula: number;
   nome: string;
   cpf?: number;
   rg?: number;
