@@ -60,7 +60,7 @@ export class ServicesModule {
   }
 
   postAlunos(alunos: Alunos) {
-    return this.http.post(`${this.baseURL}/alunos`, alunos);
+    return this.http.post(`${this.baseURL}/parentes/`, alunos);
   }
 
   putAlunos(alunos: Alunos) {

@@ -11,12 +11,12 @@ import { TeachersModule } from './teachers/teachers.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ClassesModule } from './classes/classes.module';
 import { AlunosModule } from './alunos/alunos.module';
+import { ParentesModule } from './parentes/parentes.module';
 
 import { routing } from './app.routing';
-import { ParentesComponent } from './parentes/parentes.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, NavbarComponent, ParentesComponent],
+  declarations: [AppComponent, HeaderComponent, NavbarComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -25,6 +25,7 @@ import { ParentesComponent } from './parentes/parentes.component';
     TeachersModule,
     ClassesModule,
     AlunosModule,
+    ParentesModule,
     ModalModule.forRoot(),
     routing
   ],

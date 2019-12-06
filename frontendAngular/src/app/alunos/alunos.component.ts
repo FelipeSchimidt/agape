@@ -15,7 +15,7 @@ export class AlunosComponent implements OnInit {
   aluno: Alunos;
 
   filtroLista: string;
-  modoSalvar: string = 'post';
+  modoSalvar = 'post';
 
   alunosForm: FormGroup;
 
