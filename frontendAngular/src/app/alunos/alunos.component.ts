@@ -12,8 +12,10 @@ import Alunos from './alunos';
 })
 export class AlunosComponent implements OnInit {
   alunos: Alunos[];
+  aluno: Alunos;
 
   filtroLista: string;
+  modoSalvar: string = 'post';
 
   alunosForm: FormGroup;
 
@@ -61,5 +63,41 @@ export class AlunosComponent implements OnInit {
     template.show();
   }
 
-  novoAluno(template: any) {}
+  novoAluno(template: any) {
+    this.modoSalvar = 'post';
+    this.openModal(template);
+  }
+
+  salvarRegistro(template: any) {
+    if (this.alunosForm.valid) {
+      if (this.modoSalvar === 'post') {
+        this.aluno = Object.assign({}, this.alunosForm.value);
+        this.services.postAlunos(this.aluno).subscribe(
+          response => {
+            console.log('Data Posts: ', response);
+            template.hide();
+            this.getAlunos();
+          },
+          error => {
+            console.log('Error Posts: ', error);
+          }
+        );
+      } else {
+        this.aluno = Object.assign(
+          { id: this.aluno.id },
+          this.alunosForm.value
+        );
+        this.services.putAlunos(this.aluno).subscribe(
+          response => {
+            console.log('Data Update: ', response);
+            template.hide();
+            this.getAlunos();
+          },
+          errors => {
+            console.log('Update Error: ', errors);
+          }
+        );
+      }
+    }
+  }
 }

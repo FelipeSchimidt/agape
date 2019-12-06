@@ -54,4 +54,16 @@ export class ServicesModule {
   getAllAlunos(): Observable<Alunos[]> {
     return this.http.get<Alunos[]>(`${this.baseURL}/alunos`);
   }
+
+  getShowAlunos(alunos: Alunos) {
+    return this.http.get<Alunos>(`${this.baseURL}/alunos/${alunos.matricula}`);
+  }
+
+  postAlunos(alunos: Alunos) {
+    return this.http.post(`${this.baseURL}/alunos`, alunos);
+  }
+
+  putAlunos(alunos: Alunos) {
+    return this.http.put(`${this.baseURL}/alunos/${alunos.id}`, alunos);
+  }
 }
