@@ -13,9 +13,10 @@ import { ClassesModule } from './classes/classes.module';
 import { AlunosModule } from './alunos/alunos.module';
 
 import { routing } from './app.routing';
+import { ParentesComponent } from './parentes/parentes.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, NavbarComponent],
+  declarations: [AppComponent, HeaderComponent, NavbarComponent, ParentesComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
