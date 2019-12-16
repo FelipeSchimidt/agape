@@ -46,6 +46,79 @@
   </tbody>
 </table>
 
+<div class="modal-body">
+  <form [formGroup]="parenteForm" class="needs-validation">
+    <div class="container">
+      <div class="form-row">
+        <div class="form-group">
+          <label>NOME</label>
+          <input
+            type="text"
+            [ngClass]="{
+              'is-invalid':
+                parenteForm.get('nome').errors &&
+                parenteForm.get('nome').touched
+            }"
+            class="form-control col-md-8"
+            formControlName="nome"
+          />
+          <div class="invalid-feedback">
+            Nome é obrigatório.
+          </div>
+          <div class="invalid-feedback">
+            Máximo de 100 caracteres.
+          </div>
+          <div class="invalid-feedback">
+            Mínimo de 5 caracteres.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">NASCIMENTO</label>
+          <input
+            type="text"
+            class="form-control col-md-4"
+            formControlName="nascimento"
+            bsDatepicker
+          />
+          <div class="invalid-feedback">
+            Data de Nascimento é obrigatório.
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>CPF</label>
+          <input
+            type="text"
+            class="form-control col-md-6"
+            formControlName="cpf"
+          />
+          <div class="invalid-feedback">
+            CPF é obrigatório.
+          </div>
+          <div class="invalid-feedback">
+            Máximo de 11 digitos.
+          </div>
+        </div>
+        <div class="form-group">
+          <label>RG</label>
+          <input
+            type="text"
+            class="form-control col-md-6"
+            formControlName="rg"
+          />
+          <div class="invalid-feedback">
+            RG é obrigatório.
+          </div>
+          <div class="invalid-feedback">
+            Máximo de 11 digitos.
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
 <div
   bsModal
   #template="bs-modal"
@@ -86,6 +159,12 @@
               />
               <div class="invalid-feedback">
                 Nome é obrigatório.
+              </div>
+              <div class="invalid-feedback">
+                Máximo de 100 caracteres.
+              </div>
+              <div class="invalid-feedback">
+                Mínimo de 5 caracteres.
               </div>
             </div>
           </div>

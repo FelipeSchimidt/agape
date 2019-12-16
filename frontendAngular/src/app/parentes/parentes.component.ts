@@ -17,10 +17,12 @@ export class ParentesComponent implements OnInit {
 
   modoSalvar = 'post';
   filtroLista: string;
+  tipoParentes: string[] = ['pai', 'mãe', 'avos', 'tios', 'primos'];
 
   constructor(private services: ServicesModule, private fb: FormBuilder) {}
 
   ngOnInit() {
+    this.validation();
     this.getParentes();
   }
 
@@ -34,9 +36,9 @@ export class ParentesComponent implements OnInit {
           Validators.minLength(5)
         ]
       ],
-      cpf: [''],
-      rg: [''],
-      nascimento: [''],
+      cpf: ['', [Validators.required, Validators.maxLength(11)]],
+      rg: ['', [Validators.required, Validators.maxLength(15)]],
+      nascimento: ['', [Validators.required]],
       tipo: [''],
       responsavel_financeiro: [''],
       telefone: [''],
