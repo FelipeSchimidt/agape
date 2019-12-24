@@ -1,0 +1,175 @@
+<h3 class="subtitle text-center">Familiares</h3>
+<br />
+
+<div class="d-flex">
+  <div class="form-inline mr-auto">
+    <div class="form-group mb-2">
+      <label for="" class="mr-2">Filtro:</label>
+      <input
+        type="text"
+        class="form control mr-2"
+        [(ngModel)]="filtroLista"
+        placeholder="Buscar"
+      />
+    </div>
+  </div>
+
+  <div>
+    <button class="btn btn-outline-primary" (click)="openModal(template)">
+      <i class="fa fa-plus-circle"></i>&nbsp; Novo Familiar
+    </button>
+  </div>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">NOME</th>
+      <th scope="col">CPF</th>
+      <th scope="col">NASCIMENTO</th>
+      <th scope="col">PARENTESCO</th>
+      <th scope="col">FINANCEIRO</th>
+      <th scope="col">TELEFONE</th>
+      <th scope="colspan"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let parente of parentes">
+      <td>{{ parente.id }}</td>
+      <td>{{ parente.nome }}</td>
+      <td>{{ parente.cpf }}</td>
+      <td>{{ parente.nascimento }}</td>
+      <td>{{ parente.tipo }}</td>
+      <td>{{ parente.responsavel_financeiro }}</td>
+      <td>{{ parente.telefone }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="modal-body">
+  <form [formGroup]="parenteForm" class="needs-validation">
+    <div class="container">
+      <div class="form-row">
+        <div class="form-group">
+          <label>NOME</label>
+          <input
+            type="text"
+            [ngClass]="{
+              'is-invalid':
+                parenteForm.get('nome').errors &&
+                parenteForm.get('nome').touched
+            }"
+            class="form-control col-md-8"
+            formControlName="nome"
+          />
+          <div class="invalid-feedback">
+            Nome é obrigatório.
+          </div>
+          <div class="invalid-feedback">
+            Máximo de 100 caracteres.
+          </div>
+          <div class="invalid-feedback">
+            Mínimo de 5 caracteres.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">NASCIMENTO</label>
+          <input
+            type="text"
+            class="form-control col-md-4"
+            formControlName="nascimento"
+            bsDatepicker
+          />
+          <div class="invalid-feedback">
+            Data de Nascimento é obrigatório.
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>CPF</label>
+          <input
+            type="text"
+            class="form-control col-md-6"
+            formControlName="cpf"
+          />
+          <div class="invalid-feedback">
+            CPF é obrigatório.
+          </div>
+          <div class="invalid-feedback">
+            Máximo de 11 digitos.
+          </div>
+        </div>
+        <div class="form-group">
+          <label>RG</label>
+          <input
+            type="text"
+            class="form-control col-md-6"
+            formControlName="rg"
+          />
+          <div class="invalid-feedback">
+            RG é obrigatório.
+          </div>
+          <div class="invalid-feedback">
+            Máximo de 11 digitos.
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div
+  bsModal
+  #template="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="dialog-sizes-name1"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left">
+          Cadastro de Alunos
+        </h4>
+        <button
+          type="button"
+          class="close pull-right"
+          (click)="template.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="parenteForm" class="needs-validation">
+          <div class="container"></div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>NOME</label>
+              <input
+                type="text"
+                [ngClass]="{
+                  'is-invalid':
+                    parenteForm.get('nome').errors &&
+                    parenteForm.get('nome').touched
+                }"
+                class="form-control"
+                formControlName="nome"
+              />
+              <div class="invalid-feedback">
+                Nome é obrigatório.
+              </div>
+              <div class="invalid-feedback">
+                Máximo de 100 caracteres.
+              </div>
+              <div class="invalid-feedback">
+                Mínimo de 5 caracteres.
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
