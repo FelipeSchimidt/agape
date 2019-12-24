@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ServicesModule } from '../services/services.module';
 
 import Alunos from './alunos';
+import Parentes from '../parentes/parentes';
+import Classes from '../classes/classes';
 
 @Component({
   selector: 'app-alunos',
@@ -13,6 +15,9 @@ import Alunos from './alunos';
 export class AlunosComponent implements OnInit {
   alunos: Alunos[];
   aluno: Alunos;
+
+  classes: Classes[];
+  parentes: Parentes[];
 
   filtroLista: string;
   modoSalvar: string = 'post';

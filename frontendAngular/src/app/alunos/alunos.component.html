@@ -52,6 +52,200 @@
   </tbody>
 </table>
 
+
+<div class="modal-body">
+  <h3 class="subtitle">RESPONSAVEL</h3>
+  <form [formGroup]="alunosForm" class="needs-validation">
+    <div class="container">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="">CPF</label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="">TURMA</label>
+          <input type="text" class="form-control">
+        </div>
+      </div>
+      <hr>
+      <div class="form-row">
+        <div class="form-group col-md-8">
+          <label>NOME</label>
+          <input
+            type="text"
+            [ngClass]="{
+              'is-invalid':
+                alunosForm.get('nome').errors &&
+                alunosForm.get('nome').touched
+            }"
+            class="form-control"
+            formControlName="nome"
+          />
+          <div
+            *ngIf="
+              alunosForm.get('nome').hasError('required') &&
+              alunosForm.get('nome').touched
+            "
+            class="invalid-feedback"
+          >
+            Nome é obrigatório.
+          </div>
+          <div
+            *ngIf="
+              alunosForm.get('nome').hasError('minlength') &&
+              alunosForm.get('nome').touched
+            "
+            class="invalid-feedback"
+          >
+            Mínimo de 5 caracteres.
+          </div>
+          <div
+            *ngIf="
+              alunosForm.get('nome').hasError('maxlength') &&
+              alunosForm.get('nome').touched
+            "
+            class="invalid-feedback"
+          >
+            Máximo de 100 caracteres.
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <label>DATA NASCIMENTO</label>
+          <input
+            type="text"
+            [ngClass]="{
+              'is-invalid':
+                alunosForm.get('nascimento').errors &&
+                alunosForm.get('nascimento').touched
+            }"
+            class="form-control"
+            formControlName="nascimento"
+            bsDatepicker
+          />
+          <div
+            *ngIf="
+              alunosForm.get('nascimento').hasError('required') &&
+              alunosForm.get('nascimento').touched
+            "
+            class="invalid-feedback"
+          >
+            Data de Nascimento é obrigatório.
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label>CPF</label>
+          <input
+            type="text"
+            [ngClass]="{
+              'is-invalid':
+                alunosForm.get('cpf').errors &&
+                alunosForm.get('cpf').touched
+            }"
+            class="form-control"
+            formControlName="cpf"
+          />
+          <div
+            *ngIf="
+              alunosForm.get('cpf').hasError('required') &&
+              alunosForm.get('cpf').touched
+            "
+            class="invalid-feedback"
+          >
+            CPF é obrigatório.
+          </div>
+          <div
+            *ngIf="
+              alunosForm.get('cpf').hasError('maxlenght') &&
+              alunosForm.get('cpf').touched
+            "
+            class="invalid-feedback"
+          >
+            Máximo de 11 caracteres.
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <label>RG</label>
+          <input
+            type="text"
+            [ngClass]="{
+              'is-invalid':
+                alunosForm.get('rg').errors &&
+                alunosForm.get('rg').touched
+            }"
+            class="form-control"
+            formControlName="rg"
+          />
+          <div
+            *ngIf="
+              alunosForm.get('rg').hasError('maxlength') &&
+              alunosForm.get('rg').touched
+            "
+            class="invalid-feedback"
+          >
+            Máximo de 11 caracteres.
+          </div>
+          <div
+            *ngIf="
+              alunosForm.get('rg').hasError('required') &&
+              alunosForm.get('rg').touched
+            "
+            class="invalid-feedback"
+          >
+            RG deve ser preenchido.
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <label>CERTIDAO NASCIMENTO</label>
+          <input
+            type="text"
+            [ngClass]="{
+              'is-invalid':
+                alunosForm.get('certicao_nascimento').errors &&
+                alunosForm.get('certicao_nascimento').touched
+            }"
+            class="form-control"
+            formControlName="certicao_nascimento"
+          />
+          <div
+            *ngIf="
+              alunosForm
+                .get('certicao_nascimento')
+                .hasError('maxlength') &&
+              alunosForm.get('certicao_nascimento').touched
+            "
+            class="invalid-feedback"
+          >
+            Máximo de 12 caracteres.
+          </div>
+          <div
+            *ngIf="
+              alunosForm
+                .get('certicao_nascimento')
+                .hasError('required') &&
+              alunosForm.get('certicao_nascimento').touched
+            "
+            class="invalid-feedback"
+          >
+            Informe a Certidão de Nascimento.
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md">
+          <label>OBSERVAÇÃO</label>
+          <textarea
+            type="text"
+            class="form-control"
+            formControlName="observacao"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
 <div
   bsModal
   #template="bs-modal"
@@ -77,6 +271,14 @@
       <div class="modal-body">
         <form [formGroup]="alunosForm" class="needs-validation">
           <div class="container">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="">VALIDAÇÃO DE CPF</label>
+                <input type="text" class="form-control">
+                <button class="btn btn-primary">VALIDAR</button>
+              </div>
+            </div>
+            <hr>
             <div class="form-row">
               <div class="form-group col-md-8">
                 <label>NOME</label>
