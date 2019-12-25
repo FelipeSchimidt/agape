@@ -20,7 +20,7 @@ export class AlunosComponent implements OnInit {
   parentes: Parentes[];
 
   filtroLista: string;
-  modoSalvar: string = 'post';
+  modoSalvar = 'post';
 
   alunosForm: FormGroup;
 
