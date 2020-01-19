@@ -1,6 +1,6 @@
 const Aluno = require("../models/Alunos");
 const Parente = require("../models/Parentes");
-const Classe = require("../models/Classes");
+//const Classe = require("../models/Classes");
 
 module.exports = {
   async index(req, res) {
@@ -20,20 +20,6 @@ module.exports = {
   },
 
   async store(req, res) {
-    const { parentes_cpf, classe_id } = req.params;
-
-    const parente = await Parente.findOne({ cpf: parentes_cpf });
-    console.log(parente);
-    if (!parente) {
-      return res.status(404).json({ error: "Familiar não encontrado" });
-    }
-
-    const classe = await Classe.findByPk(classe_id);
-
-    if (!classe) {
-      return res.status(404).json({ error: "Classe não cadastrada" });
-    }
-
     const [aluno, created] = await Aluno.findOrCreate({
       where: { ...req.body }
     });
@@ -41,8 +27,6 @@ module.exports = {
     if (!created) {
       return res.status(404).json({ error: "Aluno não cadastrado" });
     }
-    await parente.addAlunos(aluno);
-    await classe.addAlunos(aluno);
 
     return res.json(aluno);
   },

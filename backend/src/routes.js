@@ -1,4 +1,5 @@
 const route = require("express").Router();
+
 const AlunoController = require("./controllers/AlunoController");
 const ParenteController = require("./controllers/ParenteController");
 const ClasseController = require("./controllers/ClasseController");
@@ -6,10 +7,7 @@ const ProfessorController = require("./controllers/ProfessorController");
 
 route.get("/alunos", AlunoController.index);
 route.get("/aluno/:matricula", AlunoController.show);
-route.post(
-  "/parentes/:parentes_cpf/aluno/classe/:classe_id",
-  AlunoController.store
-);
+route.post("/aluno", AlunoController.store);
 route.put("/aluno/:matricula", AlunoController.update);
 route.delete("/aluno/:matricula", AlunoController.delete);
 
